@@ -25,8 +25,8 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -34,10 +34,10 @@
       this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
       this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.tabControl1 = new System.Windows.Forms.TabControl();
-      this.tabPage1 = new System.Windows.Forms.TabPage();
+      this.tabControl = new System.Windows.Forms.TabControl();
+      this.summonerPage = new System.Windows.Forms.TabPage();
       this.summonerTable = new System.Windows.Forms.DataGridView();
-      this.tabPage2 = new System.Windows.Forms.TabPage();
+      this.gamesPage = new System.Windows.Forms.TabPage();
       this.resetButton = new System.Windows.Forms.Button();
       this.goButton = new System.Windows.Forms.Button();
       this.botGamesCheckbox = new System.Windows.Forms.CheckBox();
@@ -51,10 +51,10 @@
       this.mapComboBox = new System.Windows.Forms.ComboBox();
       this.gameTable = new System.Windows.Forms.DataGridView();
       this.menuStrip1.SuspendLayout();
-      this.tabControl1.SuspendLayout();
-      this.tabPage1.SuspendLayout();
+      this.tabControl.SuspendLayout();
+      this.summonerPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.summonerTable)).BeginInit();
-      this.tabPage2.SuspendLayout();
+      this.gamesPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.gameTable)).BeginInit();
       this.SuspendLayout();
       // 
@@ -113,36 +113,36 @@
       // 
       // tabControl1
       // 
-      this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+      this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.tabControl1.Controls.Add(this.tabPage1);
-      this.tabControl1.Controls.Add(this.tabPage2);
-      this.tabControl1.Location = new System.Drawing.Point(14, 31);
-      this.tabControl1.Name = "tabControl1";
-      this.tabControl1.SelectedIndex = 0;
-      this.tabControl1.Size = new System.Drawing.Size(945, 488);
-      this.tabControl1.TabIndex = 3;
-      this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabSelected);
+      this.tabControl.Controls.Add(this.summonerPage);
+      this.tabControl.Controls.Add(this.gamesPage);
+      this.tabControl.Location = new System.Drawing.Point(16, 33);
+      this.tabControl.Name = "tabControl";
+      this.tabControl.SelectedIndex = 0;
+      this.tabControl.Size = new System.Drawing.Size(945, 488);
+      this.tabControl.TabIndex = 3;
+      this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabSelected);
       // 
       // tabPage1
       // 
-      this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
-      this.tabPage1.Controls.Add(this.summonerTable);
-      this.tabPage1.Location = new System.Drawing.Point(4, 24);
-      this.tabPage1.Name = "tabPage1";
-      this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage1.Size = new System.Drawing.Size(937, 460);
-      this.tabPage1.TabIndex = 0;
-      this.tabPage1.Text = "Summoner List";
+      this.summonerPage.BackColor = System.Drawing.SystemColors.Control;
+      this.summonerPage.Controls.Add(this.summonerTable);
+      this.summonerPage.Location = new System.Drawing.Point(4, 24);
+      this.summonerPage.Name = "summonerPage";
+      this.summonerPage.Padding = new System.Windows.Forms.Padding(3);
+      this.summonerPage.Size = new System.Drawing.Size(937, 460);
+      this.summonerPage.TabIndex = 0;
+      this.summonerPage.Text = "Summoner List";
       // 
       // summonerTable
       // 
       this.summonerTable.AllowUserToAddRows = false;
       this.summonerTable.AllowUserToDeleteRows = false;
       this.summonerTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
       this.summonerTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -160,30 +160,31 @@
       this.summonerTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.summonerTable.Size = new System.Drawing.Size(922, 442);
       this.summonerTable.TabIndex = 3;
+      this.summonerTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.viewSummonerDetails);
       this.summonerTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.summonerTableCellFormatting);
       this.summonerTable.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataBindingComplete);
       // 
       // tabPage2
       // 
-      this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-      this.tabPage2.Controls.Add(this.resetButton);
-      this.tabPage2.Controls.Add(this.goButton);
-      this.tabPage2.Controls.Add(this.botGamesCheckbox);
-      this.tabPage2.Controls.Add(this.spectateCheckbox);
-      this.tabPage2.Controls.Add(this.currentGameLabel);
-      this.tabPage2.Controls.Add(this.championSearch);
-      this.tabPage2.Controls.Add(this.label3);
-      this.tabPage2.Controls.Add(this.label2);
-      this.tabPage2.Controls.Add(this.summonerSearch);
-      this.tabPage2.Controls.Add(this.label1);
-      this.tabPage2.Controls.Add(this.mapComboBox);
-      this.tabPage2.Controls.Add(this.gameTable);
-      this.tabPage2.Location = new System.Drawing.Point(4, 24);
-      this.tabPage2.Name = "tabPage2";
-      this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage2.Size = new System.Drawing.Size(937, 460);
-      this.tabPage2.TabIndex = 1;
-      this.tabPage2.Text = "Game List";
+      this.gamesPage.BackColor = System.Drawing.SystemColors.Control;
+      this.gamesPage.Controls.Add(this.resetButton);
+      this.gamesPage.Controls.Add(this.goButton);
+      this.gamesPage.Controls.Add(this.botGamesCheckbox);
+      this.gamesPage.Controls.Add(this.spectateCheckbox);
+      this.gamesPage.Controls.Add(this.currentGameLabel);
+      this.gamesPage.Controls.Add(this.championSearch);
+      this.gamesPage.Controls.Add(this.label3);
+      this.gamesPage.Controls.Add(this.label2);
+      this.gamesPage.Controls.Add(this.summonerSearch);
+      this.gamesPage.Controls.Add(this.label1);
+      this.gamesPage.Controls.Add(this.mapComboBox);
+      this.gamesPage.Controls.Add(this.gameTable);
+      this.gamesPage.Location = new System.Drawing.Point(4, 24);
+      this.gamesPage.Name = "gamesPage";
+      this.gamesPage.Padding = new System.Windows.Forms.Padding(3);
+      this.gamesPage.Size = new System.Drawing.Size(937, 460);
+      this.gamesPage.TabIndex = 1;
+      this.gamesPage.Text = "Game List";
       // 
       // resetButton
       // 
@@ -314,8 +315,8 @@
       this.gameTable.AllowUserToAddRows = false;
       this.gameTable.AllowUserToDeleteRows = false;
       this.gameTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
       this.gameTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -342,7 +343,7 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(973, 533);
-      this.Controls.Add(this.tabControl1);
+      this.Controls.Add(this.tabControl);
       this.Controls.Add(this.menuStrip1);
       this.DoubleBuffered = true;
       this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -353,11 +354,11 @@
       this.Text = "LoL Stats";
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
-      this.tabControl1.ResumeLayout(false);
-      this.tabPage1.ResumeLayout(false);
+      this.tabControl.ResumeLayout(false);
+      this.summonerPage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.summonerTable)).EndInit();
-      this.tabPage2.ResumeLayout(false);
-      this.tabPage2.PerformLayout();
+      this.gamesPage.ResumeLayout(false);
+      this.gamesPage.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.gameTable)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
@@ -373,10 +374,10 @@
     private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
     private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-    private System.Windows.Forms.TabControl tabControl1;
-    private System.Windows.Forms.TabPage tabPage1;
+    private System.Windows.Forms.TabControl tabControl;
+    private System.Windows.Forms.TabPage summonerPage;
     private System.Windows.Forms.DataGridView summonerTable;
-    private System.Windows.Forms.TabPage tabPage2;
+    private System.Windows.Forms.TabPage gamesPage;
     private System.Windows.Forms.TextBox championSearch;
     private System.Windows.Forms.Label label3;
     private System.Windows.Forms.Label label2;

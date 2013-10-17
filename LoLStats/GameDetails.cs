@@ -15,8 +15,10 @@ namespace LoLStats
   public partial class GameDetails : Form
   {
     public LogData Game;
+    private Main mainForm;
 
-    public GameDetails(LogData game) {
+    public GameDetails(LogData game, Main form) {
+      mainForm = form;
       InitializeComponent();
 
       Game = game;
@@ -87,7 +89,9 @@ namespace LoLStats
         Margin = new Padding(0, 2, 0, 3),
         Font = new Font(headerLabel.Font.FontFamily, 9.5f, isPlayer ? FontStyle.Bold : FontStyle.Regular),
         AutoSize = true,
+        Cursor = Cursors.Hand,
       };
+      label.Click += (sender, e) => mainForm.OpenSummonerDetails(s.Name);
 
       string champName = "";
       foreach (var ch in s.Champion) {

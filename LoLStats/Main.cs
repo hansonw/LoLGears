@@ -65,6 +65,7 @@ namespace LoLStats
     private LogDatabase database;
     private SortableBindingList<SummonerStats> summonerData;
     private SortableBindingList<GameStats> gameData;
+    private Dictionary<string, SummonerStats> summoners;
 
     public Main() {
       InitializeComponent();
@@ -73,6 +74,21 @@ namespace LoLStats
       summonerTable.ColumnHeadersBorderStyle = ProperColumnHeadersBorderStyle;
 
       LoadLogFiles();
+    }
+
+    public void OpenSummonerDetails(string summonerName) {
+      if (summoners != null && summoners.ContainsKey(summonerName)) {
+        new SummonerDetails(summoners[summonerName], this).Show();
+      }
+    }
+
+    public void SearchSummoner(string summonerName) {
+      ResetForm();
+      summonerSearch.Text = "^" + summonerName + "$";
+      tabControl.SelectedTab = gamesPage;
+
+      ReloadGameTable();
+      gameTable.Select();
     }
 
     private void LoadLogFiles() {
@@ -126,7 +142,7 @@ namespace LoLStats
         gameTable.Sort(gameTable.Columns["Date"], ListSortDirection.Descending);
       }));
 
-      var summoners = new Dictionary<string, SummonerStats>();
+      summoners = new Dictionary<string, SummonerStats>();
       foreach (var row in logData) {
         foreach (var x in row.BlueTeam.Concat(row.PurpleTeam)) {
           if (!x.IsBot && (!row.BotGame || !x.Name.EndsWith(" Bot"))) {
@@ -161,7 +177,7 @@ namespace LoLStats
     private void summonerTableCellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
       if (summonerTable.Columns[e.ColumnIndex].Name == "Name") {
         var stats = summonerData[e.RowIndex];
-        if (stats.HasPlayed) {
+        if (stats.GamesAs > 0) {
           e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
         }
       }
@@ -175,9 +191,9 @@ namespace LoLStats
     }
 
     private void tabSelected(object sender, TabControlEventArgs e) {
-      if (e.TabPage == tabPage1) {
+      if (e.TabPage == summonerPage) {
         summonerTable.Select();
-      } else if (e.TabPage == tabPage2) {
+      } else if (e.TabPage == gamesPage) {
         gameTable.Select();
       }
     }
@@ -274,7 +290,13 @@ namespace LoLStats
     private void viewGameDetails(object sender, DataGridViewCellEventArgs e) {
       if (e.RowIndex >= 0 && e.RowIndex < gameData.Count) {
         var data = gameData[e.RowIndex];
-        new GameDetails(database.Get(data.id)).Show();
+        new GameDetails(database.Get(data.id), this).Show();
+      }
+    }
+
+    private void viewSummonerDetails(object sender, DataGridViewCellEventArgs e) {
+      if (e.RowIndex >= 0 && e.RowIndex < summonerData.Count) {
+        new SummonerDetails(summonerData[e.RowIndex], this).Show();
       }
     }
   }

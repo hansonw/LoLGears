@@ -68,6 +68,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyComparer.cs" />
     <Compile Include="SortableBindingList.cs" />
+    <Compile Include="SummonerDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SummonerDetails.Designer.cs">
+      <DependentUpon>SummonerDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="SummonerStats.cs" />
     <EmbeddedResource Include="GameDetails.resx">
       <DependentUpon>GameDetails.cs</DependentUpon>
@@ -85,6 +91,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SummonerDetails.resx">
+      <DependentUpon>SummonerDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
