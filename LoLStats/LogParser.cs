@@ -173,7 +173,9 @@ namespace LoLStats
             ret.GameVersion = new Version(match.Groups[1].Value);
           } else if ((match = MAP_REGEX.Match(text)).Success) { // Obtain map ID
             int mapID = int.Parse(match.Groups[1].Value);
-            ret.Map = MapDictionary[mapID];
+            if (!MapDictionary.TryGetValue(mapID, out ret.Map)) {
+              ret.Map = "Other";
+            }
           } else if ((match = NET_UID_REGEX.Match(text)).Success) { // client's ID
             netUID = int.Parse(match.Groups[1].Value);
           } else if (text.Contains("Started ReplayDownloadManager")) {

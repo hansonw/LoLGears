@@ -128,9 +128,27 @@ namespace LoLStats
       }
     }
 
-    public List<LogData> Select(/* params */) {
+    public List<LogData> Select(string Map = null, bool AllowSpectated = true, bool AllowBotGames = true) {
       var command = sqlConnection.CreateCommand();
       command.CommandText = "SELECT * FROM games";
+
+      var criteria = new List<string>();
+      if (!String.IsNullOrEmpty(Map)) {
+        criteria.Add("map LIKE @map");
+        command.Parameters.Add(new SQLiteParameter("@map", "%" + Map + "%"));
+      }
+      if (!AllowSpectated) {
+        criteria.Add("spectated = @spectated");
+        command.Parameters.Add(new SQLiteParameter("@spectated", false));
+      }
+      if (!AllowBotGames) {
+        criteria.Add("bot_game = @bot_game");
+        command.Parameters.Add(new SQLiteParameter("@bot_game", false));
+      }
+      if (criteria.Count > 0) {
+        command.CommandText += " WHERE " + String.Join(" AND ", criteria.ToArray());
+      }
+
       var reader = command.ExecuteReader();
 
       int numRows = files.Length;

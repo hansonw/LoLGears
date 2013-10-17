@@ -40,10 +40,13 @@ namespace LoLStats
         PurpleTeam = String.Join(", ", log.PurpleTeam.Select((x) => x.Name).ToArray());
 
         if (log.Spectated) {
-          Result = "Spectated";
+          Result = "(Spectated)";
         } else {
           Result = log.ExitCode.ToString().ToLower();
           Result = Result.Substring(0, 1).ToUpper() + Result.Substring(1);
+          if (Result == "Unknown") {
+            Result = "(" + Result + ")";
+          }
         }
       }
 
@@ -116,6 +119,11 @@ namespace LoLStats
 
     private void LoadData() {
       var logData = database.Select();
+      Invoke(new Action(() => {
+        gameTable.DataSource = gameData = new SortableBindingList<GameStats>(logData.Select(log => new GameStats(log)));
+        gameTable.Sort(gameTable.Columns["Date"], ListSortDirection.Descending);
+      }));
+
       var summoners = new Dictionary<string, SummonerStats>();
       foreach (var row in logData) {
         foreach (var x in row.BlueTeam.Concat(row.PurpleTeam)) {
@@ -133,9 +141,6 @@ namespace LoLStats
         summonerData.SetDefaultDirection("Games", -1);
         summonerData.SetDefaultDirection("KnownWins", -1);
         summonerData.SetDefaultDirection("KnownLosses", -1);
-
-        gameTable.DataSource = gameData = new SortableBindingList<GameStats>(logData.Select(log => new GameStats(log)));
-        gameTable.Sort(gameTable.Columns["Date"], ListSortDirection.Descending);
       }));
     }
 
@@ -192,6 +197,76 @@ namespace LoLStats
         table.Columns["Date"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         table.Columns["Server"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
       }
+    }
+
+    private void gameTableCellChange(object sender, EventArgs e) {
+      if (gameTable.CurrentCell != null) {
+        currentGameLabel.Text = String.Format("Game {0}/{1}", gameTable.CurrentCell.RowIndex+1, gameData.Count);
+      }
+    }
+
+    private string SanitizeString(string s) {
+      return new string(s.Where(Char.IsLetter).ToArray()).ToLower();
+    }
+
+    private void ReloadGameTable() {
+      var summonerRegex = new Regex(summonerSearch.Text, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+      string champion = SanitizeString(championSearch.Text);
+      var logData = database.Select(
+        Map: mapComboBox.SelectedItem as string,
+        AllowSpectated: spectateCheckbox.Checked,
+        AllowBotGames: botGamesCheckbox.Checked
+      ).Where(x => {
+        if (summonerSearch.Text != "" && !x.BlueTeam.Exists(s => summonerRegex.Match(s.Name).Success) &&
+            !x.PurpleTeam.Exists(s => summonerRegex.Match(s.Name).Success)) {
+          return false;
+        }
+        if (champion != "" && !x.BlueTeam.Exists(s => SanitizeString(s.Champion).StartsWith(champion)) &&
+            !x.PurpleTeam.Exists(s => SanitizeString(s.Champion).StartsWith(champion))) {
+          return false;
+        }
+        return true;
+      });
+
+      gameTable.DataSource = gameData = new SortableBindingList<GameStats>(logData.Select(log => new GameStats(log)));
+      gameTable.Sort(gameTable.Columns["Date"], ListSortDirection.Descending);
+      currentGameLabel.Text = String.Format("Game 1/{0}", gameData.Count);
+    }
+
+    private void ResetForm() {
+      spectateCheckbox.Checked = true;
+      botGamesCheckbox.Checked = true;
+      mapComboBox.SelectedItem = "";
+      summonerSearch.Text = "";
+      championSearch.Text = "";
+    }
+
+    private void spectateCheckbox_CheckedChanged(object sender, EventArgs e) {
+      ReloadGameTable();
+    }
+
+    private void botGamesCheckbox_CheckedChanged(object sender, EventArgs e) {
+      ReloadGameTable();
+    }
+
+    private void mapComboBox_SelectedIndexChanged(object sender, EventArgs e) {
+      ReloadGameTable();
+    }
+
+    private void FieldKeyDown(object sender, KeyEventArgs e) {
+      if (e.KeyCode == Keys.Enter) {
+        ReloadGameTable();
+      }
+    }
+
+    private void goButton_Click(object sender, EventArgs e) {
+      ReloadGameTable();
+    }
+
+    private void resetButton_Click(object sender, EventArgs e) {
+      ResetForm();
+      ReloadGameTable();
     }
   }
 }
