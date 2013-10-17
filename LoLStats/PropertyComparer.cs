@@ -20,11 +20,6 @@ namespace Be.Timvw.Framework.Collections.Generic
             this.SetListSortDirection(direction);
         }
 
-        public void SetDirection(int direction)
-        {
-            reverse = direction;
-        }
-
         #region IComparer<T> Members
 
         public int Compare(T x, T y)

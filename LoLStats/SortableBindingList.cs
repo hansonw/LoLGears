@@ -11,6 +11,7 @@ namespace Be.Timvw.Framework.ComponentModel
         private bool isSorted;
         private ListSortDirection listSortDirection;
         private PropertyDescriptor propertyDescriptor;
+        private Dictionary<string, int> defaultDirection = new Dictionary<string, int>();
 
         public SortableBindingList()
             : base(new List<T>())
@@ -24,10 +25,9 @@ namespace Be.Timvw.Framework.ComponentModel
             this.comparers = new Dictionary<Type, PropertyComparer<T>>();
         }
 
-        // Direction should be 1 or -1.
-        public void SetDefaultSortOrder(Type propertyType, int direction)
+        public void SetDefaultDirection(string name, int direction)
         {
-            comparers[propertyType].SetDirection(direction);
+            defaultDirection[name] = direction;
         }
 
         protected override bool SupportsSortingCore
@@ -59,6 +59,13 @@ namespace Be.Timvw.Framework.ComponentModel
         {
             List<T> itemsList = (List<T>)this.Items;
 
+            var actualDirection = direction;
+            int defaultDir = 1;
+            defaultDirection.TryGetValue(property.Name, out defaultDir);
+            if (defaultDir == -1) {
+                actualDirection = (direction == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending);
+            }
+
             Type propertyType = property.PropertyType;
             PropertyComparer<T> comparer;
             if (!this.comparers.TryGetValue(propertyType, out comparer))
@@ -67,7 +74,7 @@ namespace Be.Timvw.Framework.ComponentModel
                 this.comparers.Add(propertyType, comparer);
             }
 
-            comparer.SetPropertyAndDirection(property, direction);
+            comparer.SetPropertyAndDirection(property, actualDirection);
             itemsList.Sort(comparer);
 
             this.propertyDescriptor = property;

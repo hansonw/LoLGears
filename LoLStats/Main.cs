@@ -40,7 +40,7 @@ namespace LoLStats
         PurpleTeam = String.Join(", ", log.PurpleTeam.Select((x) => x.Name).ToArray());
 
         if (log.Spectated) {
-          Result = "-";
+          Result = "Spectated";
         } else {
           Result = log.ExitCode.ToString().ToLower();
           Result = Result.Substring(0, 1).ToUpper() + Result.Substring(1);
@@ -115,12 +115,9 @@ namespace LoLStats
     }
 
     private void LoadData() {
-      var data = database.Select();
-      Invoke(new Action(() => gameTable.DataSource = gameData = new SortableBindingList<GameStats>(data.Select(log =>
-        new GameStats(log)).OrderByDescending(x => x.Date))));
-
+      var logData = database.Select();
       var summoners = new Dictionary<string, SummonerStats>();
-      foreach (var row in data) {
+      foreach (var row in logData) {
         foreach (var x in row.BlueTeam.Concat(row.PurpleTeam)) {
           if (!x.IsBot && (!row.BotGame || !x.Name.EndsWith(" Bot"))) {
             if (!summoners.ContainsKey(x.Name)) {
@@ -130,10 +127,16 @@ namespace LoLStats
           }
         }
       }
-      Invoke(new Action(() => summonerTable.DataSource = summonerData = new SortableBindingList<SummonerStats>(
-        summoners.Values.OrderByDescending(x => x.Games))));
 
-      summonerData.SetDefaultSortOrder(typeof(SummonerStats).GetProperty("Games").PropertyType, -1);
+      Invoke(new Action(() => {
+        summonerTable.DataSource = summonerData = new SortableBindingList<SummonerStats>(summoners.Values.OrderByDescending(x => x.Games));
+        summonerData.SetDefaultDirection("Games", -1);
+        summonerData.SetDefaultDirection("KnownWins", -1);
+        summonerData.SetDefaultDirection("KnownLosses", -1);
+
+        gameTable.DataSource = gameData = new SortableBindingList<GameStats>(logData.Select(log => new GameStats(log)));
+        gameTable.Sort(gameTable.Columns["Date"], ListSortDirection.Descending);
+      }));
     }
 
     /// <summary>
@@ -186,8 +189,8 @@ namespace LoLStats
 
       if (table.Name == "gameTable") {
         // Make sure date, server column is always 100% visible.
-        table.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-        table.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        table.Columns["Date"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        table.Columns["Server"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
       }
     }
   }
