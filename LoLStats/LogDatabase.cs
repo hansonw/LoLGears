@@ -128,6 +128,18 @@ namespace LoLStats
       }
     }
 
+    public LogData Get(long id) {
+      var command = sqlConnection.CreateCommand();
+      command.CommandText = "SELECT * FROM games WHERE id = @id";
+      command.Parameters.Add(new SQLiteParameter("@id", id));
+      var reader = command.ExecuteReader();
+      if (reader.Read()) {
+        return GetDataFromRow(reader);
+      }
+
+      return null;
+    }
+
     public List<LogData> Select(string Map = null, bool AllowSpectated = true, bool AllowBotGames = true) {
       var command = sqlConnection.CreateCommand();
       command.CommandText = "SELECT * FROM games";
@@ -154,12 +166,12 @@ namespace LoLStats
       int numRows = files.Length;
       int tick = numRows/100;
       var result = new List<LogData>();
-      var unknown = new Dictionary<Int64, LogData>();
+      var unknown = new Dictionary<long, LogData>();
 
       var playedCount = new Dictionary<string, int>();
       var summonerCount = new Dictionary<string, int>();
       while (reader.Read()) {
-        var id = (Int64) reader["id"];
+        var id = (long) reader["id"];
         var data = GetDataFromRow(reader);
 
         int count;
@@ -192,7 +204,7 @@ namespace LoLStats
           var id = kvp.Key;
           var row = kvp.Value;
 
-          Int64 max = 0;
+          long max = 0;
           string bestMatch = "";
 
           // Take the most confirmed played. If we've never confirmed playing on one of these,
@@ -232,6 +244,7 @@ namespace LoLStats
 
     private LogData GetDataFromRow(SQLiteDataReader reader) {
       return new LogData() {
+        id = (long) reader["id"],
         GameID = (string) reader["game_id"],
         LogFile = (string) reader["log_file"],
         Server = (string) reader["server"],

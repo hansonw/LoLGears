@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameDetails.Designer.cs">
+      <DependentUpon>GameDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogDatabase.cs" />
     <Compile Include="LogParser.cs" />
     <Compile Include="Main.cs">
@@ -63,6 +69,9 @@
     <Compile Include="PropertyComparer.cs" />
     <Compile Include="SortableBindingList.cs" />
     <Compile Include="SummonerStats.cs" />
+    <EmbeddedResource Include="GameDetails.resx">
+      <DependentUpon>GameDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -89,9 +98,125 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="x64\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="Resources\varus.png" />
+    <None Include="Resources\drmundo.png" />
+    <None Include="Resources\amumu.png" />
+    <None Include="Resources\draven.png" />
+    <None Include="Resources\ashe.png" />
+    <None Include="Resources\darius.png" />
+    <None Include="Resources\hecarim.png" />
+    <None Include="Resources\veigar.png" />
+    <None Include="Resources\taric.png" />
+    <None Include="Resources\malzahar.png" />
+    <None Include="Resources\kayle.png" />
+    <None Include="Resources\katarina.png" />
+    <None Include="Resources\fiddlesticks.png" />
+    <None Include="Resources\alistar.png" />
+    <None Include="Resources\twitch.png" />
+    <None Include="Resources\sivir.png" />
+    <None Include="Resources\evelynn.png" />
+    <None Include="Resources\janna.png" />
+    <None Include="Resources\lulu.png" />
+    <None Include="Resources\fiora.png" />
+    <None Include="Resources\nautilus.png" />
+    <None Include="Resources\yorick.png" />
+    <None Include="Resources\wukong.png" />
+    <None Include="Resources\ziggs.png" />
+    <None Include="Resources\xerath.png" />
+    <None Include="Resources\volibear.png" />
+    <None Include="Resources\viktor.png" />
+    <None Include="Resources\vayne.png" />
+    <None Include="Resources\talon.png" />
+    <None Include="Resources\skarner.png" />
+    <None Include="Resources\shyvana.png" />
+    <None Include="Resources\rumble.png" />
+    <None Include="Resources\oriana.png" />
+    <None Include="Resources\nocturne.png" />
+    <None Include="Resources\leona.png" />
+    <None Include="Resources\leesin.png" />
+    <None Include="Resources\jarvaniv.png" />
+    <None Include="Resources\graves.png" />
+    <None Include="Resources\fizz.png" />
+    <None Include="Resources\annie.png" />
+    <None Include="Resources\ahri.png" />
+    <None Include="Resources\zilean.png" />
+    <None Include="Resources\xinzhao.png" />
+    <None Include="Resources\warwick.png" />
+    <None Include="Resources\urgot.png" />
+    <None Include="Resources\udyr.png" />
+    <None Include="Resources\tristana.png" />
+    <None Include="Resources\swain.png" />
+    <None Include="Resources\sion.png" />
+    <None Include="Resources\singed.png" />
+    <None Include="Resources\shen.png" />
+    <None Include="Resources\shaco.png" />
+    <None Include="Resources\rammus.png" />
+    <None Include="Resources\poppy.png" />
+    <None Include="Resources\olaf.png" />
+    <None Include="Resources\nidalee.png" />
+    <None Include="Resources\nasus.png" />
+    <None Include="Resources\maokai.png" />
+    <None Include="Resources\malphite.png" />
+    <None Include="Resources\kogmaw.png" />
+    <None Include="Resources\kennen.png" />
+    <None Include="Resources\karthus.png" />
+    <None Include="Resources\irelia.png" />
+    <None Include="Resources\heimerdinger.png" />
+    <None Include="Resources\gragas.png" />
+    <None Include="Resources\garen.png" />
+    <None Include="Resources\chogath.png" />
+    <None Include="Resources\caitlyn.png" />
+    <None Include="Resources\blitzcrank.png" />
+    <None Include="Resources\anivia.png" />
+    <None Include="Resources\akali.png" />
+    <None Include="Resources\lucian.png" />
+    <None Include="Resources\riven.png" />
+    <None Include="Resources\aatrox.png" />
+    <None Include="Resources\sejuani.png" />
+    <None Include="Resources\trundle.png" />
+    <None Include="Resources\nunu.png" />
+    <None Include="Resources\lissandra.png" />
+    <None Include="Resources\zac.png" />
+    <None Include="Resources\karma.png" />
+    <None Include="Resources\sona.png" />
+    <None Include="Resources\quinn.png" />
+    <None Include="Resources\thresh.png" />
+    <None Include="Resources\vi.png" />
+    <None Include="Resources\pantheon.png" />
+    <None Include="Resources\brand.png" />
+    <None Include="Resources\mordekaiser.png" />
+    <None Include="Resources\masteryi.png" />
+    <None Include="Resources\leblanc.png" />
+    <None Include="Resources\nami.png" />
+    <None Include="Resources\zed.png" />
+    <None Include="Resources\elise.png" />
+    <None Include="Resources\vladimir.png" />
+    <None Include="Resources\kassadin.png" />
+    <None Include="Resources\galio.png" />
+    <None Include="Resources\twistedfate.png" />
+    <None Include="Resources\khazix.png" />
+    <None Include="Resources\lux.png" />
+    <None Include="Resources\soraka.png" />
+    <None Include="Resources\missfortune.png" />
+    <None Include="Resources\tryndamere.png" />
+    <None Include="Resources\morgana.png" />
+    <None Include="Resources\syndra.png" />
+    <None Include="Resources\rengar.png" />
+    <None Include="Resources\ezreal.png" />
+    <None Include="Resources\ryze.png" />
+    <None Include="Resources\diana.png" />
+    <None Include="Resources\cassiopeia.png" />
+    <None Include="Resources\jayce.png" />
+    <None Include="Resources\zyra.png" />
+    <None Include="Resources\gangplank.png" />
+    <None Include="Resources\corki.png" />
+    <None Include="Resources\jax.png" />
+    <None Include="Resources\teemo.png" />
+    <None Include="Resources\renekton.png" />
+    <None Include="Resources\orianna.png" />
+    <None Include="Resources\jinx.png" />
+    <None Include="Resources\unknown.png" />
+    <None Include="Resources\monkeyking.png" />
     <Content Include="x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

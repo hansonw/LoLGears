@@ -23,6 +23,7 @@ namespace LoLStats
     public class GameStats
     {
       public GameStats(LogData log) {
+        id = log.id;
         Date = log.GameStartDate;
         Map = log.Map;
         Length = log.GameLength;
@@ -50,6 +51,7 @@ namespace LoLStats
         }
       }
 
+      public long id;
       public DateTime Date { get; set; }
       public string Server { get; set; }
       public string Map { get; set; }
@@ -267,6 +269,13 @@ namespace LoLStats
     private void resetButton_Click(object sender, EventArgs e) {
       ResetForm();
       ReloadGameTable();
+    }
+
+    private void viewGameDetails(object sender, DataGridViewCellEventArgs e) {
+      if (e.RowIndex >= 0 && e.RowIndex < gameData.Count) {
+        var data = gameData[e.RowIndex];
+        new GameDetails(database.Get(data.id)).Show();
+      }
     }
   }
 }

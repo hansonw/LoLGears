@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace LoLStats
 {
-  public struct Summoner
+  public class Summoner
   {
     public string Name;
     public string Champion;
@@ -32,6 +32,7 @@ namespace LoLStats
 
   public class LogData
   {
+    public long id;
     public string LogFile;
     public string GameID;
     public string Server = "";
@@ -174,7 +175,7 @@ namespace LoLStats
           } else if ((match = MAP_REGEX.Match(text)).Success) { // Obtain map ID
             int mapID = int.Parse(match.Groups[1].Value);
             if (!MapDictionary.TryGetValue(mapID, out ret.Map)) {
-              ret.Map = "Other";
+              ret.Map = "Unknown Map";
             }
           } else if ((match = NET_UID_REGEX.Match(text)).Success) { // client's ID
             netUID = int.Parse(match.Groups[1].Value);
