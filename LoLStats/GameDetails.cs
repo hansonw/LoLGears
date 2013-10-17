@@ -93,14 +93,7 @@ namespace LoLStats
       };
       label.Click += (sender, e) => mainForm.OpenSummonerDetails(s.Name);
 
-      string champName = "";
-      foreach (var ch in s.Champion) {
-        if (Char.IsLetter(ch)) {
-          champName += Char.ToLower(ch);
-        }
-      }
-
-      var bitmap = Resources.ResourceManager.GetObject(champName) as Bitmap;
+      var bitmap = Resources.ResourceManager.GetObject(Util.Sanitize(s.Champion)) as Bitmap;
       if (bitmap == null) {
         bitmap = Resources.unknown;
       }

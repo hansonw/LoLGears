@@ -121,7 +121,7 @@ namespace LoLStats
         var stream = new StreamReader(bs);
 
         var summonerMap = new Dictionary<string, Summoner>();
-        int netUID = -1;
+        int netUID = -2;
         var mergedTeam = new List<Summoner>();
         double startTime = -1, lastTimeStamp = -1;
         bool disconnect = false;
@@ -238,7 +238,7 @@ namespace LoLStats
                 if (!summonerMap.ContainsKey(summoner.Name)) {
                   team.Add(summonerMap[summoner.Name] = summoner);
                 }
-                if (clientID == netUID) {
+                if (!ret.Spectated && clientID == netUID) {
                   ret.PlayerName = summoner.Name;
                 }
               }

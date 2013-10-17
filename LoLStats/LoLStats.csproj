@@ -75,6 +75,7 @@
       <DependentUpon>SummonerDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="SummonerStats.cs" />
+    <Compile Include="Util.cs" />
     <EmbeddedResource Include="GameDetails.resx">
       <DependentUpon>GameDetails.cs</DependentUpon>
     </EmbeddedResource>

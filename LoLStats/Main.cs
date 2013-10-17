@@ -82,9 +82,13 @@ namespace LoLStats
       }
     }
 
-    public void SearchSummoner(string summonerName) {
+    public void SearchSummoner(string summonerName, string champion = null) {
       ResetForm();
-      summonerSearch.Text = "^" + summonerName + "$";
+      if (champion != null) {
+        summonerSearch.Text = summonerName + ":" + Util.Sanitize(champion);
+      } else {
+        summonerSearch.Text = "^" + summonerName + "$";
+      }
       tabControl.SelectedTab = gamesPage;
 
       ReloadGameTable();
@@ -223,25 +227,55 @@ namespace LoLStats
       }
     }
 
-    private string SanitizeString(string s) {
-      return new string(s.Where(Char.IsLetter).ToArray()).ToLower();
+    private bool TeamSatisfies(List<Summoner> team, List<Summoner> criteria) {
+      var champs = new Dictionary<string, string>();
+      foreach (var s in team) {
+        champs[s.Name] = Util.Sanitize(s.Champion);
+      }
+
+      foreach (var c in criteria) {
+        if (!champs.ContainsKey(c.Name)) return false;
+        if (c.Champion != "" && !champs[c.Name].StartsWith(c.Champion)) return false;
+      }
+
+      return true;
     }
 
     private void ReloadGameTable() {
-      var summonerRegex = new Regex(summonerSearch.Text, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+      var search = summonerSearch.Text;
+      Regex summonerRegex = null;
+      var criteria = new List<List<Summoner>>();
+      if (search.Contains(':') || search.Contains('|')) {
+        foreach (var side in search.Split(new char[] {'|'}, 2)) {
+          var sums = new List<Summoner>();
+          foreach (var crit in side.Split(new char[] { ',' })) {
+            string[] sum = crit.Trim().Split(new char[] {':'}, 2);
+            sums.Add(new Summoner() {Name = sum[0], Champion = sum.Length > 1 ? Util.Sanitize(sum[1]) : ""});
+          }
+          criteria.Add(sums);
+        }
+      } else if (search != "") {
+        summonerRegex = new Regex(search, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+      }
 
-      string champion = SanitizeString(championSearch.Text);
+      string champion = Util.Sanitize(championSearch.Text);
       var logData = database.Select(
         Map: mapComboBox.SelectedItem as string,
         AllowSpectated: spectateCheckbox.Checked,
         AllowBotGames: botGamesCheckbox.Checked
       ).Where(x => {
-        if (summonerSearch.Text != "" && !x.BlueTeam.Exists(s => summonerRegex.Match(s.Name).Success) &&
+        if (summonerRegex != null && !x.BlueTeam.Exists(s => summonerRegex.Match(s.Name).Success) &&
             !x.PurpleTeam.Exists(s => summonerRegex.Match(s.Name).Success)) {
           return false;
         }
-        if (champion != "" && !x.BlueTeam.Exists(s => SanitizeString(s.Champion).StartsWith(champion)) &&
-            !x.PurpleTeam.Exists(s => SanitizeString(s.Champion).StartsWith(champion))) {
+        if (criteria.Count > 0) {
+          bool ok = false;
+          ok = ok || TeamSatisfies(x.BlueTeam, criteria[0]) && (criteria.Count == 1 || TeamSatisfies(x.PurpleTeam, criteria[1]));
+          ok = ok || TeamSatisfies(x.PurpleTeam, criteria[0]) && (criteria.Count == 1 || TeamSatisfies(x.BlueTeam, criteria[1]));
+          if (!ok) return false;
+        }
+        if (champion != "" && !x.BlueTeam.Exists(s => Util.Sanitize(s.Champion).StartsWith(champion)) &&
+            !x.PurpleTeam.Exists(s => Util.Sanitize(s.Champion).StartsWith(champion))) {
           return false;
         }
         return true;
