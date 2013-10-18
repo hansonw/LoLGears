@@ -145,7 +145,7 @@ namespace LoLStats
                 match.Groups[4].Value  // time
               );
               if (!DateTime.TryParse(parsedDate, out startDate)) {
-                Debug.Print("Invalid date in " + match.Groups[0].Value);
+                Logger.LogMessage(filename + ": Invalid date in " + match.Groups[0].Value);
               }
             }
           }
@@ -162,7 +162,7 @@ namespace LoLStats
 
           if ((match = LOG_START_REGEX2.Match(text)).Success) {
             if (!DateTime.TryParse(match.Groups[1].Value, out startDate)) {
-              Debug.Print("Invalid date " + match.Groups[1].Value);
+              Logger.LogMessage(filename + ": Invalid date " + match.Groups[1].Value);
             }
           } else if ((match = GAME_ID_REGEX.Match(text)).Success) { // Obtain game ID.
             ret.GameID = match.Groups[1].Value;
@@ -293,7 +293,7 @@ namespace LoLStats
 
         return ret;
       } catch (Exception ex) {
-        Debug.Print(ex.ToString());
+        Logger.LogException(ex);
         return null;
       }
     }

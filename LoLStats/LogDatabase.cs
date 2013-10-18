@@ -33,7 +33,7 @@ namespace LoLStats
 
     private string LastFile() {
       var command = sqlConnection.CreateCommand();
-      command.CommandText = "SELECT log_file FROM games ORDER BY start_date DESC LIMIT 1";
+      command.CommandText = "SELECT log_file FROM games ORDER BY id DESC LIMIT 1";
       return (string)command.ExecuteScalar();
     }
 
@@ -46,6 +46,7 @@ namespace LoLStats
         var parser = new LogParser();
         string lastFile = LastFile();
 
+        Logger.LogMessage("Last file was: " + lastFile);
         int index = 0, length = 0, start = 0;
         foreach (var file in files) {
           if (file.CompareTo(lastFile) > 0) {
@@ -123,7 +124,7 @@ namespace LoLStats
 
         return true;
       } catch (Exception ex) {
-        Debug.Print(ex.ToString());
+        Logger.LogException(ex);
         return false;
       }
     }

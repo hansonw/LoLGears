@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 using Be.Timvw.Framework.ComponentModel;
 using Pietschsoft;
@@ -82,12 +83,28 @@ namespace LoLStats
       }
     }
 
-    public void SearchSummoner(string summonerName, string champion = null) {
+    public void SearchSummoner(string summonerName, string champion = null, string type = "") {
       ResetForm();
       if (champion != null) {
         summonerSearch.Text = summonerName + ":" + Util.Sanitize(champion);
       } else {
-        summonerSearch.Text = "^" + summonerName + "$";
+        switch (type) {
+          case "as":
+            summonerSearch.Text = "@";
+            break;
+          case "with":
+            summonerSearch.Text = "@," + summonerName;
+            break;
+          case "against":
+            summonerSearch.Text = "@|" + summonerName;
+            break;
+          case "spec":
+            summonerSearch.Text = summonerName + "#spec";
+            break;
+          default:
+            summonerSearch.Text = "^" + summonerName + "$";
+            break;
+        }
       }
       tabControl.SelectedTab = gamesPage;
 
@@ -139,9 +156,10 @@ namespace LoLStats
     }
 
     private void LoadData() {
+      Invoke(new Action(Show));
+
       var logData = database.Select();
       Invoke(new Action(() => {
-        Show();
         gameTable.DataSource = gameData = new SortableBindingList<GameStats>(logData.Select(log => new GameStats(log)));
         gameTable.Sort(gameTable.Columns["Date"], ListSortDirection.Descending);
       }));
@@ -161,6 +179,8 @@ namespace LoLStats
       Invoke(new Action(() => {
         summonerTable.DataSource = summonerData = new SortableBindingList<SummonerStats>(summoners.Values.OrderByDescending(x => x.Games));
         summonerData.SetDefaultDirection("Games", -1);
+        summonerData.SetDefaultDirection("PlayedWith", -1);
+        summonerData.SetDefaultDirection("PlayedVs", -1);
         summonerData.SetDefaultDirection("KnownWins", -1);
         summonerData.SetDefaultDirection("KnownLosses", -1);
       }));
@@ -222,10 +242,13 @@ namespace LoLStats
       }
     }
 
-    private bool TeamSatisfies(List<Summoner> team, List<Summoner> criteria) {
+    private bool TeamSatisfies(string player, List<Summoner> team, List<Summoner> criteria) {
       var champs = new Dictionary<string, string>();
       foreach (var s in team) {
         champs[s.Name.ToLower()] = Util.Sanitize(s.Champion);
+        if (s.Name == player) {
+          champs["@"] = champs[s.Name.ToLower()];
+        }
       }
 
       foreach (var c in criteria) {
@@ -241,11 +264,29 @@ namespace LoLStats
       return true;
     }
 
+    private bool CriteriaSatisfied(LogData game, List<List<Summoner>> criteria) {
+      if (TeamSatisfies(game.PlayerName, game.BlueTeam, criteria[0]) &&
+        (criteria.Count == 1 || TeamSatisfies(game.PlayerName, game.PurpleTeam, criteria[1]))) {
+        return true;
+      }
+      if (TeamSatisfies(game.PlayerName, game.PurpleTeam, criteria[0]) &&
+        (criteria.Count == 1 || TeamSatisfies(game.PlayerName, game.BlueTeam, criteria[1]))) {
+        return true;
+      }
+      return false;
+    }
+
     private void ReloadGameTable() {
       var search = summonerSearch.Text;
+      var specOnly = false;
+      if (search.EndsWith("#spec")) {
+        search = search.Substring(0, search.Length - 5);
+        specOnly = true;
+      }
+
       Regex summonerRegex = null;
       var criteria = new List<List<Summoner>>();
-      if (search.Contains(':') || search.Contains('|') || search.Contains(',')) {
+      if (Regex.IsMatch(search, "[:|,@]")) {
         foreach (var side in search.Split(new char[] {'|'}, 2)) {
           var sums = new List<Summoner>();
           foreach (var crit in side.Split(new char[] { ',' })) {
@@ -255,7 +296,11 @@ namespace LoLStats
           criteria.Add(sums);
         }
       } else if (search != "") {
-        summonerRegex = new Regex(search, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        try {
+          summonerRegex = new Regex(search, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        } catch (Exception ex) {
+          summonerRegex = new Regex(Regex.Escape(search), RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        }
       }
 
       string champion = Util.Sanitize(championSearch.Text);
@@ -264,15 +309,17 @@ namespace LoLStats
         AllowSpectated: spectateCheckbox.Checked,
         AllowBotGames: botGamesCheckbox.Checked
       ).Where(x => {
+        if (!x.Spectated && specOnly) {
+          return false;
+        }
         if (summonerRegex != null && !x.BlueTeam.Exists(s => summonerRegex.Match(s.Name).Success) &&
             !x.PurpleTeam.Exists(s => summonerRegex.Match(s.Name).Success)) {
           return false;
         }
         if (criteria.Count > 0) {
-          bool ok = false;
-          ok = ok || TeamSatisfies(x.BlueTeam, criteria[0]) && (criteria.Count == 1 || TeamSatisfies(x.PurpleTeam, criteria[1]));
-          ok = ok || TeamSatisfies(x.PurpleTeam, criteria[0]) && (criteria.Count == 1 || TeamSatisfies(x.BlueTeam, criteria[1]));
-          if (!ok) return false;
+          if (!CriteriaSatisfied(x, criteria)) {
+            return false;
+          }
         }
         if (champion != "" && !x.BlueTeam.Exists(s => Util.Sanitize(s.Champion).StartsWith(champion)) &&
             !x.PurpleTeam.Exists(s => Util.Sanitize(s.Champion).StartsWith(champion))) {

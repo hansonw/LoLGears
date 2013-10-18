@@ -25,8 +25,8 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -111,7 +111,7 @@
       this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
       this.aboutToolStripMenuItem.Text = "About...";
       // 
-      // tabControl1
+      // tabControl
       // 
       this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -125,7 +125,7 @@
       this.tabControl.TabIndex = 3;
       this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabSelected);
       // 
-      // tabPage1
+      // summonerPage
       // 
       this.summonerPage.BackColor = System.Drawing.SystemColors.Control;
       this.summonerPage.Controls.Add(this.summonerTable);
@@ -141,8 +141,8 @@
       this.summonerTable.AllowUserToAddRows = false;
       this.summonerTable.AllowUserToDeleteRows = false;
       this.summonerTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
       this.summonerTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -164,7 +164,7 @@
       this.summonerTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.summonerTableCellFormatting);
       this.summonerTable.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataBindingComplete);
       // 
-      // tabPage2
+      // gamesPage
       // 
       this.gamesPage.BackColor = System.Drawing.SystemColors.Control;
       this.gamesPage.Controls.Add(this.resetButton);
@@ -214,9 +214,9 @@
       this.botGamesCheckbox.AutoSize = true;
       this.botGamesCheckbox.Checked = true;
       this.botGamesCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.botGamesCheckbox.Location = new System.Drawing.Point(170, 435);
+      this.botGamesCheckbox.Location = new System.Drawing.Point(170, 437);
       this.botGamesCheckbox.Name = "botGamesCheckbox";
-      this.botGamesCheckbox.Size = new System.Drawing.Size(124, 19);
+      this.botGamesCheckbox.Size = new System.Drawing.Size(113, 17);
       this.botGamesCheckbox.TabIndex = 13;
       this.botGamesCheckbox.Text = "Include bot games";
       this.botGamesCheckbox.UseVisualStyleBackColor = true;
@@ -228,9 +228,9 @@
       this.spectateCheckbox.AutoSize = true;
       this.spectateCheckbox.Checked = true;
       this.spectateCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.spectateCheckbox.Location = new System.Drawing.Point(7, 435);
+      this.spectateCheckbox.Location = new System.Drawing.Point(7, 437);
       this.spectateCheckbox.Name = "spectateCheckbox";
-      this.spectateCheckbox.Size = new System.Drawing.Size(157, 19);
+      this.spectateCheckbox.Size = new System.Drawing.Size(145, 17);
       this.spectateCheckbox.TabIndex = 12;
       this.spectateCheckbox.Text = "Include spectated games";
       this.spectateCheckbox.UseVisualStyleBackColor = true;
@@ -315,8 +315,8 @@
       this.gameTable.AllowUserToAddRows = false;
       this.gameTable.AllowUserToDeleteRows = false;
       this.gameTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
+      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
       this.gameTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));

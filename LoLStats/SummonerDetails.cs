@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Be.Timvw.Framework.ComponentModel;
 
@@ -40,8 +41,18 @@ namespace LoLStats
       if (data.GamesAs > 0 && gamesDetails.Count > 0) {
         gamesDetails.Insert(0, "as: " + data.GamesAs);
       }
-      gamesPlayedLabel.Text = String.Format("Games: {0}{1}", data.Games,
-                                            gamesDetails.Count > 0 ? " (" + String.Join(", ", gamesDetails.ToArray()) + ")" : "");
+      var gamesText = gamesPlayedLabel.Text = 
+        String.Format("Games: {0}{1}", data.Games, gamesDetails.Count > 0 ? " (" + String.Join(", ", gamesDetails.ToArray()) + ")" : "");
+      
+      // Create links
+      string[] labels = new string[] {"Games", "as", "with", "against", "spec"};
+      foreach (var label in labels) {
+        var match = Regex.Match(gamesText, label + ": ([0-9]+)");
+        if (match.Success) {
+          var type = label == "Games" ? "" : label;
+          gamesPlayedLabel.Links.Add(new LinkLabel.Link(match.Groups[1].Index, match.Groups[1].Length, type));
+        }
+      }
 
       var recordDetails = new List<string>();
       if (data.WinsAs + data.LossesAs > 0) {
@@ -53,7 +64,7 @@ namespace LoLStats
       int winsAgainst = data.KnownWins - data.WinsWith - data.WinsAs;
       int lossesAgainst = data.KnownLosses - data.LossesWith - data.LossesAs;
       if (winsAgainst + lossesAgainst > 0) {
-        recordDetails.Add("against: " + winsAgainst + "-" + lossesAgainst);
+        recordDetails.Add("against: " + lossesAgainst + "-" + winsAgainst);
       }
       recordLabel.Text = "Known record" + (recordDetails.Count > 0 ? " " + String.Join(", ", recordDetails.ToArray()) : ": 0-0");
 
@@ -76,6 +87,7 @@ namespace LoLStats
       }
       championTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
       championTable.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+      championTable.Select();
     }
 
     private void lolkingLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
@@ -83,10 +95,11 @@ namespace LoLStats
       System.Diagnostics.Process.Start(uri.ToString());
     }
 
-    private void gamesLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+    private void gamesLinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
       // bring to front
       mainForm.BringToFront();
-      mainForm.SearchSummoner(Data.Name);
+      var type = (string) e.Link.LinkData; // "", "as", "with", "against", "spec"
+      mainForm.SearchSummoner(Data.Name, null, type);
     }
 
     private void closeButton_Click(object sender, EventArgs e) {
@@ -106,7 +119,7 @@ namespace LoLStats
         if (value == -1) {
           e.Value = "";
         } else {
-          e.Value = value.ToString("##.#") + '%';
+          e.Value = value.ToString("#0.#") + '%';
         }
       }
     }

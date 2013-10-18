@@ -15,6 +15,8 @@ namespace LoLStats
     public int GamesAs;
     public int GamesWith;
     public int GamesAgainst;
+    public int PlayedWith { get { return GamesAs + GamesWith; } }
+    public int PlayedVs { get { return GamesAgainst; } }
 
     public int KnownWins { get; set; }
     public int KnownLosses { get; set; }
