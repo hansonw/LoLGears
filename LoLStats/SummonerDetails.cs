@@ -45,7 +45,7 @@ namespace LoLStats
         String.Format("Games: {0}{1}", data.Games, gamesDetails.Count > 0 ? " (" + String.Join(", ", gamesDetails.ToArray()) + ")" : "");
       
       // Create links
-      string[] labels = new string[] {"Games", "as", "with", "against", "spec"};
+      string[] labels = {"Games", "as", "with", "against", "spec"};
       foreach (var label in labels) {
         var match = Regex.Match(gamesText, label + ": ([0-9]+)");
         if (match.Success) {
@@ -67,6 +67,8 @@ namespace LoLStats
         recordDetails.Add("against: " + lossesAgainst + "-" + winsAgainst);
       }
       recordLabel.Text = "Known record" + (recordDetails.Count > 0 ? " " + String.Join(", ", recordDetails.ToArray()) : ": 0-0");
+
+      timeLabel.Text = "Total time logged: " + Util.FormatTime(data.TimePlayed);
 
       championData = new SortableBindingList<SummonerStats.ChampionStats>(data.ChampStats.Values.OrderByDescending(x => x.Games));
       championData.SetDefaultDirection("Games", -1);

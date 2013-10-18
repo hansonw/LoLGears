@@ -25,7 +25,7 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.headerLabel = new System.Windows.Forms.Label();
       this.recordLabel = new System.Windows.Forms.Label();
       this.label2 = new System.Windows.Forms.Label();
@@ -35,6 +35,7 @@
       this.championTable = new System.Windows.Forms.DataGridView();
       this.label1 = new System.Windows.Forms.Label();
       this.gamesPlayedLabel = new System.Windows.Forms.LinkLabel();
+      this.timeLabel = new System.Windows.Forms.Label();
       this.flowLayoutPanel1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.championTable)).BeginInit();
       this.SuspendLayout();
@@ -64,7 +65,7 @@
       // 
       this.label2.AutoSize = true;
       this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label2.Location = new System.Drawing.Point(10, 88);
+      this.label2.Location = new System.Drawing.Point(10, 110);
       this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(139, 21);
@@ -98,7 +99,7 @@
       // 
       // closeButton
       // 
-      this.closeButton.Location = new System.Drawing.Point(247, 327);
+      this.closeButton.Location = new System.Drawing.Point(247, 349);
       this.closeButton.Name = "closeButton";
       this.closeButton.Size = new System.Drawing.Size(75, 23);
       this.closeButton.TabIndex = 9;
@@ -111,14 +112,14 @@
       this.championTable.AllowUserToAddRows = false;
       this.championTable.AllowUserToDeleteRows = false;
       this.championTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.championTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.championTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
       this.championTable.BackgroundColor = System.Drawing.Color.White;
       this.championTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.championTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
       this.championTable.ColumnHeadersHeight = 20;
       this.championTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-      this.championTable.Location = new System.Drawing.Point(12, 115);
+      this.championTable.Location = new System.Drawing.Point(12, 137);
       this.championTable.MultiSelect = false;
       this.championTable.Name = "championTable";
       this.championTable.ReadOnly = true;
@@ -133,7 +134,7 @@
       // 
       this.label1.AutoSize = true;
       this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label1.Location = new System.Drawing.Point(155, 94);
+      this.label1.Location = new System.Drawing.Point(155, 116);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(151, 13);
       this.label1.TabIndex = 12;
@@ -151,12 +152,23 @@
       this.gamesPlayedLabel.Text = "Games: 123 (as: x, with: y, against: z)";
       this.gamesPlayedLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.gamesLinkClicked);
       // 
+      // timeLabel
+      // 
+      this.timeLabel.AutoSize = true;
+      this.timeLabel.Location = new System.Drawing.Point(11, 80);
+      this.timeLabel.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
+      this.timeLabel.Name = "timeLabel";
+      this.timeLabel.Size = new System.Drawing.Size(156, 15);
+      this.timeLabel.TabIndex = 14;
+      this.timeLabel.Text = "Total time logged: 1d 2h 3m";
+      // 
       // SummonerDetails
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.AutoSize = true;
-      this.ClientSize = new System.Drawing.Size(334, 362);
+      this.ClientSize = new System.Drawing.Size(334, 384);
+      this.Controls.Add(this.timeLabel);
       this.Controls.Add(this.gamesPlayedLabel);
       this.Controls.Add(this.label1);
       this.Controls.Add(this.championTable);
@@ -188,5 +200,6 @@
     private System.Windows.Forms.DataGridView championTable;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.LinkLabel gamesPlayedLabel;
+    private System.Windows.Forms.Label timeLabel;
   }
 }

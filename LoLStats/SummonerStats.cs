@@ -17,6 +17,7 @@ namespace LoLStats
     public int GamesAgainst;
     public int PlayedWith { get { return GamesAs + GamesWith; } }
     public int PlayedVs { get { return GamesAgainst; } }
+    public int TimePlayed;
 
     public int KnownWins { get; set; }
     public int KnownLosses { get; set; }
@@ -54,6 +55,7 @@ namespace LoLStats
 
     public void AddGame(LogData data) {
       Games++;
+      TimePlayed += data.GameLength;
       if (Name == data.PlayerName) {
         GamesAs++;
       }

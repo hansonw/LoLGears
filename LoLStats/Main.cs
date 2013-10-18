@@ -67,6 +67,7 @@ namespace LoLStats
     private SortableBindingList<SummonerStats> summonerData;
     private SortableBindingList<GameStats> gameData;
     private Dictionary<string, SummonerStats> summoners;
+    private int visibleWins, visibleLosses;
 
     public Main() {
       InitializeComponent();
@@ -233,13 +234,19 @@ namespace LoLStats
         // Make sure date, server column is always 100% visible.
         table.Columns["Date"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         table.Columns["Server"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        visibleWins = visibleLosses = 0;
+        foreach (var game in gameData) {
+          if (game.Result == "Win") {
+            visibleWins++;
+          } else if (game.Result == "Lose") {
+            visibleLosses++;
+          }
+        }
       }
     }
 
     private void gameTableCellChange(object sender, EventArgs e) {
-      if (gameTable.CurrentCell != null) {
-        currentGameLabel.Text = gameData.Count > 0 ? String.Format("Game {0}/{1}", gameTable.CurrentCell.RowIndex + 1, gameData.Count) : "No games found.";
-      }
+      UpdateCounter();
     }
 
     private bool TeamSatisfies(string player, List<Summoner> team, List<Summoner> criteria) {
@@ -298,7 +305,7 @@ namespace LoLStats
       } else if (search != "") {
         try {
           summonerRegex = new Regex(search, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        } catch (Exception ex) {
+        } catch (Exception) {
           summonerRegex = new Regex(Regex.Escape(search), RegexOptions.Compiled | RegexOptions.IgnoreCase);
         }
       }
@@ -330,7 +337,7 @@ namespace LoLStats
 
       gameTable.DataSource = gameData = new SortableBindingList<GameStats>(logData.Select(log => new GameStats(log)));
       gameTable.Sort(gameTable.Columns["Date"], ListSortDirection.Descending);
-      currentGameLabel.Text = gameData.Count > 0 ? String.Format("Game 1/{0}", gameData.Count) : "No games found.";
+      UpdateCounter();
     }
 
     private void ResetForm() {
@@ -339,6 +346,15 @@ namespace LoLStats
       mapComboBox.SelectedItem = "";
       summonerSearch.Text = "";
       championSearch.Text = "";
+    }
+
+    private void UpdateCounter() {
+      if (gameData.Count > 0) {
+        currentGameLabel.Text = String.Format("Game {0}/{1}{2}", gameTable.CurrentCell != null ? gameTable.CurrentCell.RowIndex + 1 : 0, gameData.Count,
+          visibleWins + visibleLosses > 0 ? String.Format(" ({0}W/{1}L)", visibleWins, visibleLosses) : "");
+      } else {
+        currentGameLabel.Text = "No games found.";
+      }
     }
 
     private void spectateCheckbox_CheckedChanged(object sender, EventArgs e) {
