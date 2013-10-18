@@ -70,8 +70,8 @@ namespace LoLStats
     public Main() {
       InitializeComponent();
 
-      gameTable.ColumnHeadersBorderStyle = ProperColumnHeadersBorderStyle;
-      summonerTable.ColumnHeadersBorderStyle = ProperColumnHeadersBorderStyle;
+      gameTable.ColumnHeadersBorderStyle = Util.ProperColumnHeadersBorderStyle;
+      summonerTable.ColumnHeadersBorderStyle = Util.ProperColumnHeadersBorderStyle;
 
       LoadLogFiles();
     }
@@ -166,18 +166,6 @@ namespace LoLStats
       }));
     }
 
-    /// <summary>
-    /// Remove the column header border in the Aero theme in Vista,
-    /// but keep it for other themes such as standard and classic.
-    /// </summary>
-    static DataGridViewHeaderBorderStyle ProperColumnHeadersBorderStyle {
-	    get {
-	      return (SystemFonts.MessageBoxFont.Name == "Segoe UI") ?
-		      DataGridViewHeaderBorderStyle.None :
-		      DataGridViewHeaderBorderStyle.Raised;
-	    }
-    }
-
     private void summonerTableCellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
       if (summonerTable.Columns[e.ColumnIndex].Name == "Name") {
         var stats = summonerData[e.RowIndex];
@@ -230,12 +218,12 @@ namespace LoLStats
     private bool TeamSatisfies(List<Summoner> team, List<Summoner> criteria) {
       var champs = new Dictionary<string, string>();
       foreach (var s in team) {
-        champs[s.Name] = Util.Sanitize(s.Champion);
+        champs[s.Name.ToLower()] = Util.Sanitize(s.Champion);
       }
 
       foreach (var c in criteria) {
-        if (!champs.ContainsKey(c.Name)) return false;
-        if (c.Champion != "" && !champs[c.Name].StartsWith(c.Champion)) return false;
+        if (!champs.ContainsKey(c.Name.ToLower())) return false;
+        if (c.Champion != "" && !champs[c.Name.ToLower()].StartsWith(c.Champion)) return false;
       }
 
       return true;

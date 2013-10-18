@@ -23,6 +23,17 @@ namespace LoLStats
     public int WinsWith;
     public int LossesWith;
 
+    public class ChampionStats
+    {
+      public string Name { get; set; }
+      public int Games { get; set; }
+      public int Wins { get; set; }
+      public int Losses { get; set; }
+      public string DeathsPerGame { get { return DeathGames > 0 ? (1.0*Deaths/DeathGames).ToString("##.#") : ""; } }
+      public int DeathGames, Deaths;
+    }
+    public Dictionary<string, ChampionStats> ChampStats = new Dictionary<string, ChampionStats>();
+
     public SummonerStats(string name) {
       Name = name;
     }
@@ -47,6 +58,17 @@ namespace LoLStats
         }
       }
 
+      var summoner = (myTeam == 0 ? data.BlueTeam : data.PurpleTeam).Find(x => x.Name == Name);
+      if (!ChampStats.ContainsKey(summoner.Champion)) {
+        ChampStats[summoner.Champion] = new ChampionStats() { Name = summoner.Champion };
+      }
+      var cs = ChampStats[summoner.Champion];
+      cs.Games++;
+      if (Name == data.PlayerName && !data.BotGame) {
+        cs.DeathGames++;
+        cs.Deaths += data.Deaths.Count;
+      }
+
       if ((data.ExitCode == LogData.ExitCodes.WIN ||
            data.ExitCode == LogData.ExitCodes.LOSE) && !data.Spectated) {
         Debug.Assert(data.PlayerName != "");
@@ -69,8 +91,10 @@ namespace LoLStats
 
         if (gameResult) {
           KnownWins++;
+          cs.Wins++;
         } else {
           KnownLosses++;
+          cs.Losses++;
         }
       }
     }

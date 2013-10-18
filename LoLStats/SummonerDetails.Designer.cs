@@ -25,6 +25,7 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
       this.headerLabel = new System.Windows.Forms.Label();
       this.gamesPlayedLabel = new System.Windows.Forms.Label();
       this.recordLabel = new System.Windows.Forms.Label();
@@ -32,7 +33,11 @@
       this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
       this.gamesLink = new System.Windows.Forms.LinkLabel();
       this.lolkingLink = new System.Windows.Forms.LinkLabel();
+      this.closeButton = new System.Windows.Forms.Button();
+      this.championTable = new System.Windows.Forms.DataGridView();
+      this.label1 = new System.Windows.Forms.Label();
       this.flowLayoutPanel1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.championTable)).BeginInit();
       this.SuspendLayout();
       // 
       // headerLabel
@@ -49,7 +54,7 @@
       // gamesPlayedLabel
       // 
       this.gamesPlayedLabel.AutoSize = true;
-      this.gamesPlayedLabel.Location = new System.Drawing.Point(12, 45);
+      this.gamesPlayedLabel.Location = new System.Drawing.Point(11, 44);
       this.gamesPlayedLabel.Margin = new System.Windows.Forms.Padding(0, 10, 3, 0);
       this.gamesPlayedLabel.Name = "gamesPlayedLabel";
       this.gamesPlayedLabel.Size = new System.Drawing.Size(234, 15);
@@ -59,7 +64,7 @@
       // recordLabel
       // 
       this.recordLabel.AutoSize = true;
-      this.recordLabel.Location = new System.Drawing.Point(12, 63);
+      this.recordLabel.Location = new System.Drawing.Point(11, 62);
       this.recordLabel.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
       this.recordLabel.Name = "recordLabel";
       this.recordLabel.Size = new System.Drawing.Size(270, 15);
@@ -70,7 +75,7 @@
       // 
       this.label2.AutoSize = true;
       this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label2.Location = new System.Drawing.Point(9, 91);
+      this.label2.Location = new System.Drawing.Point(10, 88);
       this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(139, 21);
@@ -117,12 +122,57 @@
       this.lolkingLink.Text = "lolking";
       this.lolkingLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lolkingLink_LinkClicked);
       // 
+      // closeButton
+      // 
+      this.closeButton.Location = new System.Drawing.Point(247, 327);
+      this.closeButton.Name = "closeButton";
+      this.closeButton.Size = new System.Drawing.Size(75, 23);
+      this.closeButton.TabIndex = 9;
+      this.closeButton.Text = "Close";
+      this.closeButton.UseVisualStyleBackColor = true;
+      this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+      // 
+      // championTable
+      // 
+      this.championTable.AllowUserToAddRows = false;
+      this.championTable.AllowUserToDeleteRows = false;
+      this.championTable.AllowUserToResizeRows = false;
+      dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.championTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+      this.championTable.BackgroundColor = System.Drawing.Color.White;
+      this.championTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.championTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+      this.championTable.ColumnHeadersHeight = 20;
+      this.championTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+      this.championTable.Location = new System.Drawing.Point(12, 115);
+      this.championTable.MultiSelect = false;
+      this.championTable.Name = "championTable";
+      this.championTable.ReadOnly = true;
+      this.championTable.RowHeadersVisible = false;
+      this.championTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.championTable.Size = new System.Drawing.Size(310, 206);
+      this.championTable.TabIndex = 11;
+      this.championTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.showChampionGames);
+      // 
+      // label1
+      // 
+      this.label1.AutoSize = true;
+      this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label1.Location = new System.Drawing.Point(155, 94);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(151, 13);
+      this.label1.TabIndex = 12;
+      this.label1.Text = "(double click to view games)";
+      // 
       // SummonerDetails
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.AutoSize = true;
       this.ClientSize = new System.Drawing.Size(334, 362);
+      this.Controls.Add(this.label1);
+      this.Controls.Add(this.championTable);
+      this.Controls.Add(this.closeButton);
       this.Controls.Add(this.flowLayoutPanel1);
       this.Controls.Add(this.label2);
       this.Controls.Add(this.recordLabel);
@@ -134,6 +184,7 @@
       this.Text = "SummonerDetails";
       this.flowLayoutPanel1.ResumeLayout(false);
       this.flowLayoutPanel1.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.championTable)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -148,5 +199,8 @@
     private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     private System.Windows.Forms.LinkLabel gamesLink;
     private System.Windows.Forms.LinkLabel lolkingLink;
+    private System.Windows.Forms.Button closeButton;
+    private System.Windows.Forms.DataGridView championTable;
+    private System.Windows.Forms.Label label1;
   }
 }

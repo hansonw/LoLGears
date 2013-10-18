@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Be.Timvw.Framework.ComponentModel;
 
 namespace LoLStats
 {
@@ -13,6 +14,7 @@ namespace LoLStats
   {
     public SummonerStats Data;
     private Main mainForm;
+    private SortableBindingList<SummonerStats.ChampionStats> championData;
 
     public SummonerDetails(SummonerStats data, Main form) {
       mainForm = form;
@@ -54,6 +56,24 @@ namespace LoLStats
         recordDetails.Add("against: " + winsAgainst + "-" + lossesAgainst);
       }
       recordLabel.Text = "Known record" + (recordDetails.Count > 0 ? " " + String.Join(", ", recordDetails.ToArray()) : ": 0-0");
+
+      championData = new SortableBindingList<SummonerStats.ChampionStats>(data.ChampStats.Values.OrderByDescending(x => x.Games));
+      championData.SetDefaultDirection("Games", -1);
+      championData.SetDefaultDirection("Wins", -1);
+      championData.SetDefaultDirection("Losses", -1);
+
+      championTable.DataSource = championData;
+      championTable.ColumnHeadersBorderStyle = Util.ProperColumnHeadersBorderStyle;
+      championTable.Columns["Wins"].HeaderText = "W";
+      championTable.Columns["Losses"].HeaderText = "L";
+      if (data.GamesAs > 0) {
+        championTable.Columns["DeathsPerGame"].HeaderText = "D/G";
+        championTable.Columns["DeathsPerGame"].ToolTipText = "Deaths per game";
+      } else {
+        championTable.Columns["DeathsPerGame"].Visible = false;
+      }
+      championTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+      championTable.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
     }
 
     private void lolkingLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
@@ -65,6 +85,17 @@ namespace LoLStats
       // bring to front
       mainForm.BringToFront();
       mainForm.SearchSummoner(Data.Name);
+    }
+
+    private void closeButton_Click(object sender, EventArgs e) {
+      Close();
+    }
+
+    private void showChampionGames(object sender, DataGridViewCellEventArgs e) {
+      if (e.RowIndex >= 0 && e.RowIndex < championData.Count) {
+        mainForm.BringToFront();
+        mainForm.SearchSummoner(Data.Name, championData[e.RowIndex].Name);
+      }
     }
   }
 }
