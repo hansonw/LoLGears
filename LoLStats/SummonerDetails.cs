@@ -61,11 +61,13 @@ namespace LoLStats
       championData.SetDefaultDirection("Games", -1);
       championData.SetDefaultDirection("Wins", -1);
       championData.SetDefaultDirection("Losses", -1);
+      championData.SetDefaultDirection("WinRate", -1);
 
       championTable.DataSource = championData;
       championTable.ColumnHeadersBorderStyle = Util.ProperColumnHeadersBorderStyle;
       championTable.Columns["Wins"].HeaderText = "W";
       championTable.Columns["Losses"].HeaderText = "L";
+      championTable.Columns["WinRate"].HeaderText = "WR";
       if (data.GamesAs > 0) {
         championTable.Columns["DeathsPerGame"].HeaderText = "D/G";
         championTable.Columns["DeathsPerGame"].ToolTipText = "Deaths per game";
@@ -95,6 +97,17 @@ namespace LoLStats
       if (e.RowIndex >= 0 && e.RowIndex < championData.Count) {
         mainForm.BringToFront();
         mainForm.SearchSummoner(Data.Name, championData[e.RowIndex].Name);
+      }
+    }
+
+    private void championTableCellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
+      if (championTable.Columns[e.ColumnIndex].Name == "WinRate") {
+        var value = (double) e.Value;
+        if (value == -1) {
+          e.Value = "";
+        } else {
+          e.Value = value.ToString("##.#") + '%';
+        }
       }
     }
   }

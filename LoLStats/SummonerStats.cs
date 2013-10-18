@@ -18,6 +18,12 @@ namespace LoLStats
 
     public int KnownWins { get; set; }
     public int KnownLosses { get; set; }
+    public double WinRate {
+      get { 
+        int total = KnownWins + KnownLosses;
+        return total > 0 ? 100.0*KnownWins/total : -1;
+      }
+    }
     public int WinsAs;
     public int LossesAs;
     public int WinsWith;
@@ -29,6 +35,12 @@ namespace LoLStats
       public int Games { get; set; }
       public int Wins { get; set; }
       public int Losses { get; set; }
+      public double WinRate {
+        get {
+          int total = Wins + Losses;
+          return total > 0 ? 100.0 * Wins / total : -1;
+        }
+      }
       public string DeathsPerGame { get { return DeathGames > 0 ? (1.0*Deaths/DeathGames).ToString("##.#") : ""; } }
       public int DeathGames, Deaths;
     }

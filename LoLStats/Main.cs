@@ -132,7 +132,6 @@ namespace LoLStats
       bg.RunWorkerCompleted += (sender, e) => {
         pd.CloseDialog();
         // Bring to front; closing the dialog seems to send the window to the back.
-        Show();
         TopMost = true;
         TopMost = false;
       };
@@ -142,6 +141,7 @@ namespace LoLStats
     private void LoadData() {
       var logData = database.Select();
       Invoke(new Action(() => {
+        Show();
         gameTable.DataSource = gameData = new SortableBindingList<GameStats>(logData.Select(log => new GameStats(log)));
         gameTable.Sort(gameTable.Columns["Date"], ListSortDirection.Descending);
       }));
@@ -171,6 +171,13 @@ namespace LoLStats
         var stats = summonerData[e.RowIndex];
         if (stats.GamesAs > 0) {
           e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+        }
+      } else if (summonerTable.Columns[e.ColumnIndex].Name == "WinRate") {
+        var value = (double) e.Value;
+        if (value == -1) {
+          e.Value = "";
+        } else {
+          e.Value = value.ToString("#0.#") + '%';
         }
       }
     }
@@ -211,7 +218,7 @@ namespace LoLStats
 
     private void gameTableCellChange(object sender, EventArgs e) {
       if (gameTable.CurrentCell != null) {
-        currentGameLabel.Text = String.Format("Game {0}/{1}", gameTable.CurrentCell.RowIndex+1, gameData.Count);
+        currentGameLabel.Text = gameData.Count > 0 ? String.Format("Game {0}/{1}", gameTable.CurrentCell.RowIndex + 1, gameData.Count) : "No games found.";
       }
     }
 
@@ -222,8 +229,13 @@ namespace LoLStats
       }
 
       foreach (var c in criteria) {
-        if (!champs.ContainsKey(c.Name.ToLower())) return false;
-        if (c.Champion != "" && !champs[c.Name.ToLower()].StartsWith(c.Champion)) return false;
+        if (String.IsNullOrEmpty(c.Name)) {
+          if (String.IsNullOrEmpty(c.Champion)) continue;
+          if (team.FindIndex(x => Util.Sanitize(x.Champion).StartsWith(c.Champion)) == -1) return false;
+        } else {
+          if (!champs.ContainsKey(c.Name.ToLower())) return false;
+          if (c.Champion != "" && !champs[c.Name.ToLower()].StartsWith(c.Champion)) return false;
+        }
       }
 
       return true;
@@ -233,7 +245,7 @@ namespace LoLStats
       var search = summonerSearch.Text;
       Regex summonerRegex = null;
       var criteria = new List<List<Summoner>>();
-      if (search.Contains(':') || search.Contains('|')) {
+      if (search.Contains(':') || search.Contains('|') || search.Contains(',')) {
         foreach (var side in search.Split(new char[] {'|'}, 2)) {
           var sums = new List<Summoner>();
           foreach (var crit in side.Split(new char[] { ',' })) {
@@ -271,7 +283,7 @@ namespace LoLStats
 
       gameTable.DataSource = gameData = new SortableBindingList<GameStats>(logData.Select(log => new GameStats(log)));
       gameTable.Sort(gameTable.Columns["Date"], ListSortDirection.Descending);
-      currentGameLabel.Text = String.Format("Game 1/{0}", gameData.Count);
+      currentGameLabel.Text = gameData.Count > 0 ? String.Format("Game 1/{0}", gameData.Count) : "No games found.";
     }
 
     private void ResetForm() {

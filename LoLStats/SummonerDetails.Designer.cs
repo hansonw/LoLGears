@@ -25,7 +25,7 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       this.headerLabel = new System.Windows.Forms.Label();
       this.gamesPlayedLabel = new System.Windows.Forms.Label();
       this.recordLabel = new System.Windows.Forms.Label();
@@ -137,8 +137,8 @@
       this.championTable.AllowUserToAddRows = false;
       this.championTable.AllowUserToDeleteRows = false;
       this.championTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.championTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.championTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
       this.championTable.BackgroundColor = System.Drawing.Color.White;
       this.championTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.championTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -153,6 +153,7 @@
       this.championTable.Size = new System.Drawing.Size(310, 206);
       this.championTable.TabIndex = 11;
       this.championTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.showChampionGames);
+      this.championTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.championTableCellFormatting);
       // 
       // label1
       // 
@@ -181,7 +182,7 @@
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.MaximizeBox = false;
       this.Name = "SummonerDetails";
-      this.Text = "SummonerDetails";
+      this.Text = "Summoner Details";
       this.flowLayoutPanel1.ResumeLayout(false);
       this.flowLayoutPanel1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.championTable)).EndInit();
