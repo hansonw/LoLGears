@@ -25,7 +25,7 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.headerLabel = new System.Windows.Forms.Label();
       this.recordLabel = new System.Windows.Forms.Label();
       this.label2 = new System.Windows.Forms.Label();
@@ -112,8 +112,8 @@
       this.championTable.AllowUserToAddRows = false;
       this.championTable.AllowUserToDeleteRows = false;
       this.championTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.championTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.championTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
       this.championTable.BackgroundColor = System.Drawing.Color.White;
       this.championTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.championTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;

@@ -44,7 +44,7 @@ namespace LoLStats
           return total > 0 ? 100.0 * Wins / total : -1;
         }
       }
-      public string DeathsPerGame { get { return DeathGames > 0 ? (1.0*Deaths/DeathGames).ToString("##.#") : ""; } }
+      public string DeathsPerGame { get { return DeathGames > 0 ? (1.0*Deaths/DeathGames).ToString("#0.#") : ""; } }
       public int DeathGames, Deaths;
     }
     public Dictionary<string, ChampionStats> ChampStats = new Dictionary<string, ChampionStats>();
