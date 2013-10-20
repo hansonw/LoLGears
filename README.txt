@@ -10,10 +10,12 @@ Features:
 - Aggregated statistics of all summoners you've played with.
 - Detailed summoner statistics, including record as/with/against.
 
-Limitations:
+Notes and Limitations:
 - If you've re-formatted / deleted the LoL directory at some point,
   statistics for games before then won't be available.
+- I don't know of any way to distinguish between ranked/normal/customs.
 - Game win/losses are only available after patch 3.10.0.237 (2013-07-31).
+    - Bot games are not included in wins and losses.
 - The identity of the player is not certain before 3.01.0.1 (2013-02-01).
   However, I try to intelligently guess based on how often a name appears.
   This should be fine for most cases, unless you swapped account with

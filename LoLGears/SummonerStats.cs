@@ -86,7 +86,7 @@ namespace LoLGears
       }
 
       if ((data.ExitCode == LogData.ExitCodes.WIN ||
-           data.ExitCode == LogData.ExitCodes.LOSE) && !data.Spectated) {
+           data.ExitCode == LogData.ExitCodes.LOSE) && !data.Spectated && !data.BotGame) {
         Debug.Assert(data.PlayerName != "");
         bool gameResult = data.ExitCode == LogData.ExitCodes.WIN;
         if (data.PlayerName == Name) {

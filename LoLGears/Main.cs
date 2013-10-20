@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -50,6 +51,8 @@ namespace LoLGears
           Result = Result.Substring(0, 1).ToUpper() + Result.Substring(1);
           if (Result == "Unknown") {
             Result = "(" + Result + ")";
+          } else if (log.BotGame) {
+            Result += " (vs AI)";
           }
         }
       }
@@ -468,7 +471,11 @@ namespace LoLGears
         "- Use a colon ':' to search for a summoner playing a particular champion.\n" +
         "    e.g. 'Doublelift:Ezreal'\n" +
         "- Use a '@' to search for yourself.\n" +
-        "- Any combination of the above.");
+        "- Any combination of the above.", "Advanced Search");
+    }
+
+    private void readmeMenuItem_Click(object sender, EventArgs e) {
+      Process.Start("README.txt");
     }
   }
 }
