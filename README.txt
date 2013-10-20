@@ -1,19 +1,21 @@
 LoLGears
 ========
 
-App that shows your lifetime game history based on LoL's debug logs.
+App that tracks your lifetime game history based on LoL's debug logs.
 These can usually be found in:
   C:\Riot Games\League of Legends\Logs\Game - R3d logs.
 
 Features:
 - Full game listing, including summoners, champions, death logs + win/loss.
+  (For some reason, every log has all death recaps..)
 - Aggregated statistics of all summoners you've played with.
 - Detailed summoner statistics, including record as/with/against.
 
 Notes and Limitations:
 - If you've re-formatted / deleted the LoL directory at some point,
   statistics for games before then won't be available.
-- I don't know of any way to distinguish between ranked/normal/customs.
+- It doesn't seem possible to distinguish between ranked/normal/customs.
+- There is no way to track a summoner across name changes.
 - Game win/losses are only available after patch 3.10.0.237 (2013-07-31).
     - Bot games are not included in wins and losses.
 - The identity of the player is not certain before 3.01.0.1 (2013-02-01).
@@ -23,5 +25,6 @@ Notes and Limitations:
 - Server regions aren't logged before 1.0.0.150 (2012-10-25).
   This shouldn't affect you unless you've used the same summoner name
   across two servers before that date.
-- It's hard to detect bots with 100% certainty; it's possible for bots to
-  show up in the statistics.
+- It's hard to detect bots with 100% certainty; it's possible that some
+  custom bot games are undetected.
+  (Summoner names like "Annie Bot" should work fine though!)
