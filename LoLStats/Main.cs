@@ -434,5 +434,17 @@ namespace LoLStats
         new SummonerDetails(summonerData[e.RowIndex], this).Show();
       }
     }
+
+    private void refreshGamesMenuItem_Click(object sender, EventArgs e) {
+      LoadLogFiles();
+    }
+
+    private void exitMenuItem_Click(object sender, EventArgs e) {
+      Close();
+    }
+
+    private void aboutMenuItem_Click(object sender, EventArgs e) {
+      new AboutDialog().Show();
+    }
   }
 }

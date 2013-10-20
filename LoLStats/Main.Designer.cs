@@ -25,15 +25,15 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.refreshGamesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-      this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+      this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.tabControl = new System.Windows.Forms.TabControl();
       this.summonerPage = new System.Windows.Forms.TabPage();
       this.summonerTable = new System.Windows.Forms.DataGridView();
@@ -73,43 +73,46 @@
       // fileToolStripMenuItem
       // 
       this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem,
+            this.refreshGamesMenuItem,
             this.toolStripSeparator1,
-            this.exitToolStripMenuItem1});
+            this.exitMenuItem});
       this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
       this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-      this.fileToolStripMenuItem.Text = "File";
+      this.fileToolStripMenuItem.Text = "&File";
       // 
-      // exitToolStripMenuItem
+      // refreshGamesMenuItem
       // 
-      this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-      this.exitToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-      this.exitToolStripMenuItem.Text = "Refresh games...";
+      this.refreshGamesMenuItem.Name = "refreshGamesMenuItem";
+      this.refreshGamesMenuItem.Size = new System.Drawing.Size(160, 22);
+      this.refreshGamesMenuItem.Text = "&Refresh games...";
+      this.refreshGamesMenuItem.Click += new System.EventHandler(this.refreshGamesMenuItem_Click);
       // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
       this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
       // 
-      // exitToolStripMenuItem1
+      // exitMenuItem
       // 
-      this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-      this.exitToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
-      this.exitToolStripMenuItem1.Text = "Exit";
+      this.exitMenuItem.Name = "exitMenuItem";
+      this.exitMenuItem.Size = new System.Drawing.Size(160, 22);
+      this.exitMenuItem.Text = "E&xit";
+      this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
       // 
       // helpToolStripMenuItem
       // 
       this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
+            this.aboutMenuItem});
       this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
       this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-      this.helpToolStripMenuItem.Text = "Help";
+      this.helpToolStripMenuItem.Text = "&Help";
       // 
-      // aboutToolStripMenuItem
+      // aboutMenuItem
       // 
-      this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-      this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-      this.aboutToolStripMenuItem.Text = "About...";
+      this.aboutMenuItem.Name = "aboutMenuItem";
+      this.aboutMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.aboutMenuItem.Text = "&About...";
+      this.aboutMenuItem.Click += new System.EventHandler(this.aboutMenuItem_Click);
       // 
       // tabControl
       // 
@@ -141,8 +144,8 @@
       this.summonerTable.AllowUserToAddRows = false;
       this.summonerTable.AllowUserToDeleteRows = false;
       this.summonerTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
       this.summonerTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -315,8 +318,8 @@
       this.gameTable.AllowUserToAddRows = false;
       this.gameTable.AllowUserToDeleteRows = false;
       this.gameTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
       this.gameTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -369,11 +372,11 @@
 
     private System.Windows.Forms.MenuStrip menuStrip1;
     private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem refreshGamesMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-    private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
+    private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
     private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
     private System.Windows.Forms.TabControl tabControl;
     private System.Windows.Forms.TabPage summonerPage;
     private System.Windows.Forms.DataGridView summonerTable;
