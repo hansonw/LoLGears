@@ -31,11 +31,11 @@
       this.lengthLabel = new System.Windows.Forms.Label();
       this.blueTeamFlow = new System.Windows.Forms.FlowLayoutPanel();
       this.purpleTeamFlow = new System.Windows.Forms.FlowLayoutPanel();
-      this.deathsLabel = new System.Windows.Forms.Label();
       this.panel1 = new System.Windows.Forms.Panel();
       this.resultLabel = new System.Windows.Forms.Label();
       this.resultDisclaimer = new System.Windows.Forms.ToolTip(this.components);
       this.closeButton = new System.Windows.Forms.Button();
+      this.deathsLabel = new System.Windows.Forms.LinkLabel();
       this.panel1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -87,16 +87,6 @@
       this.purpleTeamFlow.Size = new System.Drawing.Size(240, 110);
       this.purpleTeamFlow.TabIndex = 4;
       // 
-      // deathsLabel
-      // 
-      this.deathsLabel.AutoSize = true;
-      this.deathsLabel.Location = new System.Drawing.Point(9, 203);
-      this.deathsLabel.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
-      this.deathsLabel.Name = "deathsLabel";
-      this.deathsLabel.Size = new System.Drawing.Size(157, 15);
-      this.deathsLabel.TabIndex = 5;
-      this.deathsLabel.Text = "You had X deaths this game.";
-      // 
       // panel1
       // 
       this.panel1.Controls.Add(this.resultLabel);
@@ -136,13 +126,25 @@
       this.closeButton.UseVisualStyleBackColor = true;
       this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
       // 
+      // deathsLabel
+      // 
+      this.deathsLabel.AutoSize = true;
+      this.deathsLabel.LinkArea = new System.Windows.Forms.LinkArea(0, 0);
+      this.deathsLabel.Location = new System.Drawing.Point(9, 203);
+      this.deathsLabel.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+      this.deathsLabel.Name = "deathsLabel";
+      this.deathsLabel.Size = new System.Drawing.Size(157, 15);
+      this.deathsLabel.TabIndex = 8;
+      this.deathsLabel.Text = "You had X deaths this game.";
+      this.deathsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.showDeaths);
+      // 
       // GameDetails
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(534, 262);
-      this.Controls.Add(this.closeButton);
       this.Controls.Add(this.deathsLabel);
+      this.Controls.Add(this.closeButton);
       this.Controls.Add(this.purpleTeamFlow);
       this.Controls.Add(this.blueTeamFlow);
       this.Controls.Add(this.lengthLabel);
@@ -169,10 +171,10 @@
     private System.Windows.Forms.Label lengthLabel;
     private System.Windows.Forms.FlowLayoutPanel blueTeamFlow;
     private System.Windows.Forms.FlowLayoutPanel purpleTeamFlow;
-    private System.Windows.Forms.Label deathsLabel;
     private System.Windows.Forms.Panel panel1;
     private System.Windows.Forms.Label resultLabel;
     private System.Windows.Forms.ToolTip resultDisclaimer;
     private System.Windows.Forms.Button closeButton;
+    private System.Windows.Forms.LinkLabel deathsLabel;
   }
 }

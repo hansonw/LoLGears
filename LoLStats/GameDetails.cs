@@ -61,12 +61,13 @@ namespace LoLStats
         string msg = "";
         if (Game.Deaths.Count > 7) {
           msg = " (Feeder!)";
-        } else if (Game.Deaths.Count > 0) {
-          msg = " (Killed by " + String.Join(", ", Game.Deaths.Select(x => x.Name).Distinct().ToArray()) + ")";
-        } else {
+        } else if (Game.Deaths.Count == 0) {
           msg = " (Nice!)";
         }
         deathsLabel.Text = String.Format("You had {0} death{1} this game. {2}", Game.Deaths.Count, Game.Deaths.Count == 1 ? "" : "s", msg);
+        if (Game.Deaths.Count > 0) {
+          deathsLabel.LinkArea = new LinkArea("You had ".Length, Game.Deaths.Count.ToString().Length);
+        }
       }
 
       dateLabel.Text = String.Format("Played on {0}{1} (version {2})",
@@ -112,6 +113,11 @@ namespace LoLStats
 
     private void closeButton_Click(object sender, EventArgs e) {
       Close();
+    }
+
+    private void showDeaths(object sender, LinkLabelLinkClickedEventArgs e) {
+      string msg = "You died to:\n" + String.Join("\n", Game.Deaths.Select((x, i) => (i+1) + ". " + x.Name + " (" + x.Champion + ")").ToArray());
+      MessageBox.Show(msg, "Deaths");
     }
   }
 }

@@ -93,7 +93,7 @@ namespace LoLStats
       } else {
         switch (type) {
           case "as":
-            summonerSearch.Text = "@";
+            summonerSearch.Text = "@" + summonerName;
             break;
           case "with":
             summonerSearch.Text = "@," + summonerName;
@@ -292,7 +292,7 @@ namespace LoLStats
       foreach (var s in team) {
         champs[s.Name.ToLower()] = Util.Sanitize(s.Champion);
         if (s.Name == player) {
-          champs["@"] = champs[s.Name.ToLower()];
+          champs["@" + s.Name.ToLower()] = champs["@"] = champs[s.Name.ToLower()];
         }
       }
 
