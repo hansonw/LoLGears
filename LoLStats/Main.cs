@@ -446,5 +446,17 @@ namespace LoLStats
     private void aboutMenuItem_Click(object sender, EventArgs e) {
       new AboutDialog().Show();
     }
+
+    private void searchHelpButton_Click(object sender, EventArgs e) {
+      MessageBox.Show("Advanced search syntax:\n" +
+        "- Use commas to search for summoners on the same team.\n" +
+        "    e.g. 'Doublelift, aphromoo'\n" +
+        "- Use a bar '|' to search for summoners on opposite teams.\n" +
+        "    e.g. 'Doublelift, Chauster|WildTurtle, Xpecial'\n" +
+        "- Use a colon ':' to search for a summoner playing a particular champion.\n" +
+        "    e.g. 'Doublelift:Ezreal'\n" +
+        "- Use a '@' to search for yourself.\n" +
+        "- Any combination of the above.");
+    }
   }
 }

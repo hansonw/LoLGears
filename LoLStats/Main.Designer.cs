@@ -25,8 +25,8 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.refreshGamesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +50,7 @@
       this.label1 = new System.Windows.Forms.Label();
       this.mapComboBox = new System.Windows.Forms.ComboBox();
       this.gameTable = new System.Windows.Forms.DataGridView();
+      this.searchHelpButton = new System.Windows.Forms.Button();
       this.menuStrip1.SuspendLayout();
       this.tabControl.SuspendLayout();
       this.summonerPage.SuspendLayout();
@@ -144,8 +145,8 @@
       this.summonerTable.AllowUserToAddRows = false;
       this.summonerTable.AllowUserToDeleteRows = false;
       this.summonerTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
       this.summonerTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -170,6 +171,7 @@
       // gamesPage
       // 
       this.gamesPage.BackColor = System.Drawing.SystemColors.Control;
+      this.gamesPage.Controls.Add(this.searchHelpButton);
       this.gamesPage.Controls.Add(this.resetButton);
       this.gamesPage.Controls.Add(this.goButton);
       this.gamesPage.Controls.Add(this.botGamesCheckbox);
@@ -217,9 +219,9 @@
       this.botGamesCheckbox.AutoSize = true;
       this.botGamesCheckbox.Checked = true;
       this.botGamesCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.botGamesCheckbox.Location = new System.Drawing.Point(170, 437);
+      this.botGamesCheckbox.Location = new System.Drawing.Point(170, 435);
       this.botGamesCheckbox.Name = "botGamesCheckbox";
-      this.botGamesCheckbox.Size = new System.Drawing.Size(113, 17);
+      this.botGamesCheckbox.Size = new System.Drawing.Size(124, 19);
       this.botGamesCheckbox.TabIndex = 13;
       this.botGamesCheckbox.Text = "Include bot games";
       this.botGamesCheckbox.UseVisualStyleBackColor = true;
@@ -231,9 +233,9 @@
       this.spectateCheckbox.AutoSize = true;
       this.spectateCheckbox.Checked = true;
       this.spectateCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.spectateCheckbox.Location = new System.Drawing.Point(7, 437);
+      this.spectateCheckbox.Location = new System.Drawing.Point(7, 435);
       this.spectateCheckbox.Name = "spectateCheckbox";
-      this.spectateCheckbox.Size = new System.Drawing.Size(145, 17);
+      this.spectateCheckbox.Size = new System.Drawing.Size(157, 19);
       this.spectateCheckbox.TabIndex = 12;
       this.spectateCheckbox.Text = "Include spectated games";
       this.spectateCheckbox.UseVisualStyleBackColor = true;
@@ -272,7 +274,7 @@
       // 
       this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.label2.AutoSize = true;
-      this.label2.Location = new System.Drawing.Point(325, 10);
+      this.label2.Location = new System.Drawing.Point(292, 11);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(123, 15);
       this.label2.TabIndex = 8;
@@ -281,7 +283,7 @@
       // summonerSearch
       // 
       this.summonerSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.summonerSearch.Location = new System.Drawing.Point(462, 7);
+      this.summonerSearch.Location = new System.Drawing.Point(421, 7);
       this.summonerSearch.Name = "summonerSearch";
       this.summonerSearch.Size = new System.Drawing.Size(139, 23);
       this.summonerSearch.TabIndex = 7;
@@ -318,8 +320,8 @@
       this.gameTable.AllowUserToAddRows = false;
       this.gameTable.AllowUserToDeleteRows = false;
       this.gameTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
       this.gameTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -340,6 +342,17 @@
       this.gameTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gameTableCellFormatting);
       this.gameTable.CurrentCellChanged += new System.EventHandler(this.gameTableCellChange);
       this.gameTable.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataBindingComplete);
+      // 
+      // searchHelpButton
+      // 
+      this.searchHelpButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.searchHelpButton.Location = new System.Drawing.Point(566, 7);
+      this.searchHelpButton.Name = "searchHelpButton";
+      this.searchHelpButton.Size = new System.Drawing.Size(37, 23);
+      this.searchHelpButton.TabIndex = 16;
+      this.searchHelpButton.Text = "?";
+      this.searchHelpButton.UseVisualStyleBackColor = true;
+      this.searchHelpButton.Click += new System.EventHandler(this.searchHelpButton_Click);
       // 
       // Main
       // 
@@ -393,6 +406,7 @@
     private System.Windows.Forms.Label currentGameLabel;
     private System.Windows.Forms.Button resetButton;
     private System.Windows.Forms.Button goButton;
+    private System.Windows.Forms.Button searchHelpButton;
   }
 }
 
