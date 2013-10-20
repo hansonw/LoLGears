@@ -25,8 +25,8 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.refreshGamesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -145,12 +145,11 @@
       this.summonerTable.AllowUserToAddRows = false;
       this.summonerTable.AllowUserToDeleteRows = false;
       this.summonerTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
       this.summonerTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.summonerTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
       this.summonerTable.BackgroundColor = System.Drawing.Color.White;
       this.summonerTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.summonerTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -320,8 +319,8 @@
       this.gameTable.AllowUserToAddRows = false;
       this.gameTable.AllowUserToDeleteRows = false;
       this.gameTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
       this.gameTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));

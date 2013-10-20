@@ -66,6 +66,7 @@ namespace LoLStats
     }
 
     private LogDatabase database;
+    private List<LogData> logData;
     private SortableBindingList<SummonerStats> summonerData;
     private SortableBindingList<GameStats> gameData;
     private Dictionary<string, SummonerStats> summoners;
@@ -197,10 +198,10 @@ namespace LoLStats
     private void LoadData() {
       Invoke(new Action(Show));
 
-      var logData = database.Select();
+      logData = database.Select();
       Invoke(new Action(() => {
         gameTable.DataSource = gameData = new SortableBindingList<GameStats>(logData.Select(log => new GameStats(log)));
-        gameTable.Sort(gameTable.Columns["Date"], ListSortDirection.Descending);
+        gameData.SetDefaultDirection("Date", -1);
       }));
 
       summoners = new Dictionary<string, SummonerStats>();
@@ -259,8 +260,6 @@ namespace LoLStats
     private void DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e) {
       var table = sender as DataGridView;
 
-      table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-      table.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
       table.Columns[table.Columns.Count - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
       foreach (DataGridViewColumn column in table.Columns) {
@@ -269,9 +268,9 @@ namespace LoLStats
       }
 
       if (table.Name == "gameTable") {
-        // Make sure date, server column is always 100% visible.
-        table.Columns["Date"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-        table.Columns["Server"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        // Set widths manually; autofill is _really_ slow.
+        table.Columns["Date"].Width = 125;
+        table.Columns["Server"].Width = 50;
         visibleWins = visibleLosses = 0;
         foreach (var game in gameData) {
           if (game.Result == "Win") {
@@ -280,6 +279,8 @@ namespace LoLStats
             visibleLosses++;
           }
         }
+      } else {
+        table.Columns["Name"].Width = 200;
       }
     }
 
@@ -349,11 +350,16 @@ namespace LoLStats
       }
 
       string champion = Util.Sanitize(championSearch.Text);
-      var logData = database.Select(
-        Map: mapComboBox.SelectedItem as string,
-        AllowSpectated: spectateCheckbox.Checked,
-        AllowBotGames: botGamesCheckbox.Checked
-      ).Where(x => {
+      var data = logData.Where(x => {
+        if (mapComboBox.SelectedItem != null && !x.Map.Contains((string)mapComboBox.SelectedItem)) {
+          return false;
+        }
+        if (x.Spectated && !spectateCheckbox.Checked) {
+          return false;
+        }
+        if (x.BotGame && !botGamesCheckbox.Checked) {
+          return false; 
+        }
         if (!x.Spectated && specOnly) {
           return false;
         }
@@ -373,8 +379,7 @@ namespace LoLStats
         return true;
       });
 
-      gameTable.DataSource = gameData = new SortableBindingList<GameStats>(logData.Select(log => new GameStats(log)));
-      gameTable.Sort(gameTable.Columns["Date"], ListSortDirection.Descending);
+      gameTable.DataSource = gameData = new SortableBindingList<GameStats>(data.Select(log => new GameStats(log)));
       UpdateCounter();
     }
 

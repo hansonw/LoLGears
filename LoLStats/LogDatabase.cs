@@ -64,7 +64,7 @@ namespace LoLStats
             if (data != null) {
               if (rows.Count > 0) {
                 LogData lastLog = rows.Last();
-                if (lastLog.GameID == data.GameID) {
+                if (lastLog.GameID == data.GameID && lastLog.Spectated == data.Spectated) {
                   // Merge these games together.
                   lastLog.GameLength = (int)(data.GameStartDate - lastLog.GameStartDate).TotalSeconds + data.GameLength;
                   lastLog.ExitCode = data.ExitCode;
@@ -151,26 +151,9 @@ namespace LoLStats
       return null;
     }
 
-    public List<LogData> Select(string Map = null, bool AllowSpectated = true, bool AllowBotGames = true) {
+    public List<LogData> Select() {
       var command = sqlConnection.CreateCommand();
-      command.CommandText = "SELECT * FROM games";
-
-      var criteria = new List<string>();
-      if (!String.IsNullOrEmpty(Map)) {
-        criteria.Add("map LIKE @map");
-        command.Parameters.Add(new SQLiteParameter("@map", "%" + Map + "%"));
-      }
-      if (!AllowSpectated) {
-        criteria.Add("spectated = @spectated");
-        command.Parameters.Add(new SQLiteParameter("@spectated", false));
-      }
-      if (!AllowBotGames) {
-        criteria.Add("bot_game = @bot_game");
-        command.Parameters.Add(new SQLiteParameter("@bot_game", false));
-      }
-      if (criteria.Count > 0) {
-        command.CommandText += " WHERE " + String.Join(" AND ", criteria.ToArray());
-      }
+      command.CommandText = "SELECT * FROM games ORDER BY id DESC";
 
       var reader = command.ExecuteReader();
 
@@ -269,7 +252,7 @@ namespace LoLStats
         PurpleTeam = SplitObjects((string) reader["purple_team"], Summoner.Parse),
         PlayerName = (string) reader["player_name"],
         ExitCode = (LogData.ExitCodes)Enum.Parse(typeof(LogData.ExitCodes), (string) reader["exit_code"]),
-        Deaths = SplitObjects((string) reader["deaths"], Summoner.Parse)
+        Deaths = SplitObjects((string) reader["deaths"], int.Parse)
       };
     }
   }

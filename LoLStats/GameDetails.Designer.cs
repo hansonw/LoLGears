@@ -36,6 +36,7 @@
       this.resultDisclaimer = new System.Windows.Forms.ToolTip(this.components);
       this.closeButton = new System.Windows.Forms.Button();
       this.deathsLabel = new System.Windows.Forms.LinkLabel();
+      this.viewGameLogButton = new System.Windows.Forms.Button();
       this.panel1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -122,7 +123,7 @@
       this.closeButton.Name = "closeButton";
       this.closeButton.Size = new System.Drawing.Size(75, 23);
       this.closeButton.TabIndex = 7;
-      this.closeButton.Text = "Close";
+      this.closeButton.Text = "&Close";
       this.closeButton.UseVisualStyleBackColor = true;
       this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
       // 
@@ -138,11 +139,22 @@
       this.deathsLabel.Text = "You had X deaths this game.";
       this.deathsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.showDeaths);
       // 
+      // viewGameLogButton
+      // 
+      this.viewGameLogButton.Location = new System.Drawing.Point(10, 230);
+      this.viewGameLogButton.Name = "viewGameLogButton";
+      this.viewGameLogButton.Size = new System.Drawing.Size(113, 23);
+      this.viewGameLogButton.TabIndex = 9;
+      this.viewGameLogButton.Text = "&View game log...";
+      this.viewGameLogButton.UseVisualStyleBackColor = true;
+      this.viewGameLogButton.Click += new System.EventHandler(this.viewGameLog_Click);
+      // 
       // GameDetails
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(534, 262);
+      this.Controls.Add(this.viewGameLogButton);
       this.Controls.Add(this.deathsLabel);
       this.Controls.Add(this.closeButton);
       this.Controls.Add(this.purpleTeamFlow);
@@ -176,5 +188,6 @@
     private System.Windows.Forms.ToolTip resultDisclaimer;
     private System.Windows.Forms.Button closeButton;
     private System.Windows.Forms.LinkLabel deathsLabel;
+    private System.Windows.Forms.Button viewGameLogButton;
   }
 }

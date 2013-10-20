@@ -89,6 +89,7 @@
       this.Controls.Add(this.versionLabel);
       this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+      this.MaximizeBox = false;
       this.Name = "AboutDialog";
       this.Text = "About";
       this.ResumeLayout(false);

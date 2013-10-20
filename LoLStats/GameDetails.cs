@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
@@ -116,8 +118,18 @@ namespace LoLStats
     }
 
     private void showDeaths(object sender, LinkLabelLinkClickedEventArgs e) {
-      string msg = "You died to:\n" + String.Join("\n", Game.Deaths.Select((x, i) => (i+1) + ". " + x.Name + " (" + x.Champion + ")").ToArray());
+      var combinedSummoners = new List<Summoner>(Game.BlueTeam);
+      combinedSummoners.AddRange(Game.PurpleTeam);
+      string msg = "You died to:\n" + String.Join("\n", Game.Deaths.Select((x, i) => {
+        if (x == -1) return (i + 1) + ". Tower/Minion";
+        var s = combinedSummoners[x];
+        return (i + 1) + ". " + s.Name + " (" + s.Champion + ")";
+      }).ToArray());
       MessageBox.Show(msg, "Deaths");
+    }
+
+    private void viewGameLog_Click(object sender, EventArgs e) {
+      Process.Start(Game.LogFile);
     }
   }
 }

@@ -48,7 +48,7 @@ namespace LoLStats
     public List<Summoner> PurpleTeam = new List<Summoner>();
 
     public string PlayerName = "";
-    public List<Summoner> Deaths = new List<Summoner>();
+    public List<int> Deaths = new List<int>();
     public enum ExitCodes {
       UNKNOWN,
       WIN,
@@ -103,6 +103,28 @@ namespace LoLStats
       {12, "Howling Abyss"},
     };
 
+    public static string FixChampionName(string champ) {
+      switch (champ.ToLower()) {
+        case "monkeyking":
+          return "Wukong";
+        case "khazix":
+          return "Kha'Zix";
+        case "kogmaw":
+          return "Kog'Maw";
+        case "chogath":
+          return "Cho'Gath";
+        case "leblanc":
+          return "LeBlanc"; // don't separate
+        case "fiddlesticks":
+          return "Fiddlesticks"; // the S is capitalized by default for some reason
+        case "drmundo":
+          return "Dr. Mundo"; // add the period
+        default:
+          // Separate e.g. JarvanIV => Jarvan IV
+          return Regex.Replace(champ, "([a-z])([A-Z])", "$1 $2");
+      }
+    }
+
     public Regex LOG_START_REGEX1 = new Regex("Log started at (.+) (.+) (.+) (.+) (.+)", RegexOptions.Compiled);
     public Regex LOG_START_REGEX2 = new Regex("Logging started at (.*)", RegexOptions.Compiled);
     public Regex GAME_ID_REGEX = new Regex("Receiving PKT_World_SendGameNumber, GameID[: ]+([0-9a-zA-Z]+)(.*?PlatformID: ([A-Z]+))?", RegexOptions.Compiled);
@@ -120,7 +142,7 @@ namespace LoLStats
         var bs = new BufferedStream(file);
         var stream = new StreamReader(bs);
 
-        var summonerMap = new Dictionary<string, Summoner>();
+        var summonerMap = new Dictionary<string, int>();
         int netUID = -2;
         var mergedTeam = new List<Summoner>();
         double startTime = -1, lastTimeStamp = -1;
@@ -192,7 +214,8 @@ namespace LoLStats
             if (summonerMap.ContainsKey(killer)) {
               ret.Deaths.Add(summonerMap[killer]);
             } else {
-              ret.Deaths.Add(new Summoner() { Name = killer });
+              // Most likely tower or minion.
+              ret.Deaths.Add(-1);
             }
           } else if (text == "Disconnected") {
             disconnect = true;
@@ -221,7 +244,7 @@ namespace LoLStats
               match = CHAMPION_REGEX1.Match(text);
               if (match.Success) {
                 var summoner = new Summoner() {
-                  Champion = match.Groups[1].Value,
+                  Champion = FixChampionName(match.Groups[1].Value),
                   SkinID = int.Parse(match.Groups[2].Value),
                   Name = match.Groups[5].Value
                 };
@@ -236,7 +259,8 @@ namespace LoLStats
 
                 List<Summoner> team = (teamID == 100 ? ret.BlueTeam : ret.PurpleTeam);
                 if (!summonerMap.ContainsKey(summoner.Name)) {
-                  team.Add(summonerMap[summoner.Name] = summoner);
+                  team.Add(summoner);
+                  summonerMap[summoner.Name] = summonerMap.Count;
                 }
                 if (!ret.Spectated && clientID == netUID) {
                   ret.PlayerName = summoner.Name;
@@ -246,7 +270,7 @@ namespace LoLStats
               match = CHAMPION_REGEX2.Match(text);
               if (match.Success) {
                 var summoner = new Summoner() {
-                  Champion = match.Groups[1].Value,
+                  Champion = FixChampionName(match.Groups[1].Value),
                   Name = match.Groups[4].Value
                 };
 
@@ -258,7 +282,8 @@ namespace LoLStats
 
                 // Guess the team.. might not be accurate for 1v5 bot games and such.
                 if (!summonerMap.ContainsKey(summoner.Name)) {
-                  mergedTeam.Add(summonerMap[summoner.Name] = summoner);
+                  mergedTeam.Add(summoner);
+                  summonerMap[summoner.Name] = summonerMap.Count;
                 }
               }
             }
