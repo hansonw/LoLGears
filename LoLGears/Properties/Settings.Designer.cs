@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LoLStats.Properties {
+namespace LoLGears.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

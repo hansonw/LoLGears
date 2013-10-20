@@ -8,8 +8,8 @@
     <ProjectGuid>{8E9CAAFF-D8B1-426D-9F11-E596751110C5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LoLStats</RootNamespace>
-    <AssemblyName>LoLStats</AssemblyName>
+    <RootNamespace>LoLGears</RootNamespace>
+    <AssemblyName>LoLGears</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -258,7 +258,7 @@
       <MergeAsm Include="$(OutputPath)log4net.dll" />
     </ItemGroup>
     <PropertyGroup>
-      <MergedAssembly>$(ProjectDir)$(OutDir)LoLStatsMerged.exe</MergedAssembly>
+      <MergedAssembly>$(ProjectDir)$(OutDir)LoLGearsMerged.exe</MergedAssembly>
     </PropertyGroup>
     <Message Text="ILMerge @(MergeAsm) -&gt; $(MergedAssembly)" Importance="high" />
     <ILMerge InputAssemblies="@(MergeAsm)" OutputFile="$(MergedAssembly)" TargetKind="SameAsPrimaryAssembly" />

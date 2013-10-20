@@ -1,4 +1,4 @@
-﻿namespace LoLStats
+﻿namespace LoLGears
 {
   partial class AboutDialog
   {
@@ -26,9 +26,9 @@
     /// </summary>
     private void InitializeComponent() {
       this.versionLabel = new System.Windows.Forms.Label();
-      this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+      this.githubLink = new System.Windows.Forms.LinkLabel();
       this.button1 = new System.Windows.Forms.Button();
-      this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+      this.emailLink = new System.Windows.Forms.LinkLabel();
       this.SuspendLayout();
       // 
       // versionLabel
@@ -38,22 +38,23 @@
       this.versionLabel.Location = new System.Drawing.Point(9, 9);
       this.versionLabel.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
       this.versionLabel.Name = "versionLabel";
-      this.versionLabel.Size = new System.Drawing.Size(158, 32);
+      this.versionLabel.Size = new System.Drawing.Size(129, 32);
       this.versionLabel.TabIndex = 0;
-      this.versionLabel.Text = "LoLStats 1.0.0";
+      this.versionLabel.Text = "LoLGears v";
       // 
-      // linkLabel1
+      // githubLink
       // 
-      this.linkLabel1.AutoSize = true;
-      this.linkLabel1.LinkArea = new System.Windows.Forms.LinkArea(8, 34);
-      this.linkLabel1.Location = new System.Drawing.Point(15, 51);
-      this.linkLabel1.Margin = new System.Windows.Forms.Padding(0, 10, 3, 0);
-      this.linkLabel1.Name = "linkLabel1";
-      this.linkLabel1.Size = new System.Drawing.Size(248, 21);
-      this.linkLabel1.TabIndex = 1;
-      this.linkLabel1.TabStop = true;
-      this.linkLabel1.Text = "Github: http://github.com/hansonw/LoLStats";
-      this.linkLabel1.UseCompatibleTextRendering = true;
+      this.githubLink.AutoSize = true;
+      this.githubLink.LinkArea = new System.Windows.Forms.LinkArea(8, 34);
+      this.githubLink.Location = new System.Drawing.Point(15, 51);
+      this.githubLink.Margin = new System.Windows.Forms.Padding(0, 10, 3, 0);
+      this.githubLink.Name = "githubLink";
+      this.githubLink.Size = new System.Drawing.Size(252, 21);
+      this.githubLink.TabIndex = 1;
+      this.githubLink.TabStop = true;
+      this.githubLink.Text = "Github: http://github.com/hansonw/LoLGears";
+      this.githubLink.UseCompatibleTextRendering = true;
+      this.githubLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkClicked);
       // 
       // button1
       // 
@@ -65,27 +66,28 @@
       this.button1.UseVisualStyleBackColor = true;
       this.button1.Click += new System.EventHandler(this.button1_Click);
       // 
-      // linkLabel2
+      // emailLink
       // 
-      this.linkLabel2.AutoSize = true;
-      this.linkLabel2.LinkArea = new System.Windows.Forms.LinkArea(7, 20);
-      this.linkLabel2.Location = new System.Drawing.Point(15, 72);
-      this.linkLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-      this.linkLabel2.Name = "linkLabel2";
-      this.linkLabel2.Size = new System.Drawing.Size(174, 21);
-      this.linkLabel2.TabIndex = 3;
-      this.linkLabel2.TabStop = true;
-      this.linkLabel2.Text = "Email: hanson.wng@gmail.com";
-      this.linkLabel2.UseCompatibleTextRendering = true;
+      this.emailLink.AutoSize = true;
+      this.emailLink.LinkArea = new System.Windows.Forms.LinkArea(23, 20);
+      this.emailLink.Location = new System.Drawing.Point(15, 72);
+      this.emailLink.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+      this.emailLink.Name = "emailLink";
+      this.emailLink.Size = new System.Drawing.Size(271, 21);
+      this.emailLink.TabIndex = 3;
+      this.emailLink.TabStop = true;
+      this.emailLink.Text = "Send feedback/bugs to: hanson.wng@gmail.com";
+      this.emailLink.UseCompatibleTextRendering = true;
+      this.emailLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkClicked);
       // 
       // AboutDialog
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(305, 143);
-      this.Controls.Add(this.linkLabel2);
+      this.Controls.Add(this.emailLink);
       this.Controls.Add(this.button1);
-      this.Controls.Add(this.linkLabel1);
+      this.Controls.Add(this.githubLink);
       this.Controls.Add(this.versionLabel);
       this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -100,8 +102,8 @@
     #endregion
 
     private System.Windows.Forms.Label versionLabel;
-    private System.Windows.Forms.LinkLabel linkLabel1;
+    private System.Windows.Forms.LinkLabel githubLink;
     private System.Windows.Forms.Button button1;
-    private System.Windows.Forms.LinkLabel linkLabel2;
+    private System.Windows.Forms.LinkLabel emailLink;
   }
 }

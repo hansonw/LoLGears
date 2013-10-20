@@ -10,9 +10,9 @@ using System.Reflection;
 using System.Resources;
 using System.Text;
 using System.Windows.Forms;
-using LoLStats.Properties;
+using LoLGears.Properties;
 
-namespace LoLStats
+namespace LoLGears
 {
   public partial class GameDetails : Form
   {

@@ -2,7 +2,7 @@
 using System.IO;
 using log4net;
 
-namespace LoLStats
+namespace LoLGears
 {
   class Logger
   {
@@ -20,7 +20,7 @@ namespace LoLStats
       };
       appender.ActivateOptions();
       log4net.Config.BasicConfigurator.Configure(appender);
-      log = LogManager.GetLogger("LoLStats");
+      log = LogManager.GetLogger("LoLGears");
     }
 
     public static void LogException(Exception e) {

@@ -1,4 +1,4 @@
-﻿namespace LoLStats
+﻿namespace LoLGears
 {
   partial class SummonerDetails
   {

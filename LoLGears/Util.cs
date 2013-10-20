@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LoLStats
+namespace LoLGears
 {
   public class Util
   {

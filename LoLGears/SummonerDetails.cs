@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Be.Timvw.Framework.ComponentModel;
 
-namespace LoLStats
+namespace LoLGears
 {
   public partial class SummonerDetails : Form
   {

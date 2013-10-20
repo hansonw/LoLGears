@@ -10,10 +10,10 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Be.Timvw.Framework.ComponentModel;
-using LoLStats.Properties;
+using LoLGears.Properties;
 using Pietschsoft;
 
-namespace LoLStats
+namespace LoLGears
 {
   public partial class Main : Form
   {
@@ -160,7 +160,7 @@ namespace LoLStats
       pd.CancelMessage = "Please wait while the operation is cancelled...";
       pd.Maximum = 100;
       pd.Value = 0;
-      pd.Line1 = "Loading LoLStats...";
+      pd.Line1 = "Loading LoLGears...";
       pd.Line2 = "Loading new logs...";
       pd.Line3 = "This may take a while. Please be patient..";
 

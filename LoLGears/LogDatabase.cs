@@ -7,7 +7,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 
-namespace LoLStats
+namespace LoLGears
 {
   class LogDatabase
   {
@@ -15,10 +15,10 @@ namespace LoLStats
     private string[] files;
 
     public LogDatabase() {
-      if (!File.Exists("lolstats.db")) {
-        SQLiteConnection.CreateFile("lolstats.db");
+      if (!File.Exists("LoLGears.db")) {
+        SQLiteConnection.CreateFile("LoLGears.db");
       }
-      sqlConnection = new SQLiteConnection("Data Source=lolstats.db;Version=3;Compress=True");
+      sqlConnection = new SQLiteConnection("Data Source=LoLGears.db;Version=3;Compress=True");
       sqlConnection.Open();
 
       var command = sqlConnection.CreateCommand();
