@@ -15,7 +15,7 @@ namespace LoLGears
     public AboutDialog() {
       InitializeComponent();
 
-      versionLabel.Text = "LoLGears v" + Application.ProductVersion;
+      versionLabel.Text = "version " + Application.ProductVersion;
     }
 
     private void button1_Click(object sender, EventArgs e) {
