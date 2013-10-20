@@ -60,10 +60,20 @@ namespace LoLStats
             }
 
             var data = parser.ParseLog(file);
+            worker.ReportProgress(index*100/length, new int[] { index-start+1, length });
             if (data != null) {
+              if (rows.Count > 0) {
+                LogData lastLog = rows.Last();
+                if (lastLog.GameID == data.GameID) {
+                  // Merge these games together.
+                  lastLog.GameLength = (int)(data.GameStartDate - lastLog.GameStartDate).TotalSeconds + data.GameLength;
+                  lastLog.ExitCode = data.ExitCode;
+                  lastLog.Deaths.AddRange(data.Deaths);
+                  continue;
+                }
+              } 
               rows.Add(data);
             }
-            worker.ReportProgress(index*100/length, new int[] { index-start+1, length });
           }
           index++;
         }
