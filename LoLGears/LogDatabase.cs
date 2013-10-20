@@ -45,11 +45,14 @@ namespace LoLGears
         var rows = new List<LogData>();
         var parser = new LogParser();
         string lastFile = LastFile();
+        if (lastFile != null) {
+          lastFile = Path.GetFileName(lastFile);
+        }
 
         Logger.LogMessage("Last file was: " + lastFile);
         int index = 0, length = 0, start = 0;
         foreach (var file in files) {
-          if (file.CompareTo(lastFile) > 0) {
+          if (Path.GetFileName(file).CompareTo(lastFile) > 0) {
             if (length == 0) {
               start = index;
               length = files.Length - index;

@@ -25,8 +25,9 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.refreshGamesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,8 +153,8 @@
       this.summonerTable.AllowUserToAddRows = false;
       this.summonerTable.AllowUserToDeleteRows = false;
       this.summonerTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
       this.summonerTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -338,8 +339,8 @@
       this.gameTable.AllowUserToAddRows = false;
       this.gameTable.AllowUserToDeleteRows = false;
       this.gameTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
       this.gameTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -389,11 +390,12 @@
       this.Controls.Add(this.menuStrip1);
       this.DoubleBuffered = true;
       this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MainMenuStrip = this.menuStrip1;
       this.MinimumSize = new System.Drawing.Size(989, 571);
       this.Name = "Main";
       this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-      this.Text = "LoL Stats";
+      this.Text = "LoLGears";
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
       this.tabControl.ResumeLayout(false);

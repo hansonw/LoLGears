@@ -25,8 +25,9 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SummonerDetails));
       this.headerLabel = new System.Windows.Forms.Label();
       this.recordLabel = new System.Windows.Forms.Label();
       this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -152,8 +153,8 @@
       this.championTable.AllowUserToAddRows = false;
       this.championTable.AllowUserToDeleteRows = false;
       this.championTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.championTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.championTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
       this.championTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
       this.championTable.BackgroundColor = System.Drawing.Color.White;
       this.championTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -189,8 +190,8 @@
       this.deathTable.AllowUserToAddRows = false;
       this.deathTable.AllowUserToDeleteRows = false;
       this.deathTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.deathTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.deathTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
       this.deathTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
       this.deathTable.BackgroundColor = System.Drawing.Color.White;
       this.deathTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -221,6 +222,7 @@
       this.Controls.Add(this.recordLabel);
       this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MaximizeBox = false;
       this.Name = "SummonerDetails";
       this.Text = "Summoner Details";

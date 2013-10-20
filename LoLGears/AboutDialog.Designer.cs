@@ -25,6 +25,7 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutDialog));
       this.versionLabel = new System.Windows.Forms.Label();
       this.githubLink = new System.Windows.Forms.LinkLabel();
       this.button1 = new System.Windows.Forms.Button();
@@ -91,6 +92,7 @@
       this.Controls.Add(this.versionLabel);
       this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MaximizeBox = false;
       this.Name = "AboutDialog";
       this.Text = "About";

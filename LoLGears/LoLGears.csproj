@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.2\lib\net35-full\log4net.dll</HintPath>
@@ -240,6 +243,7 @@
     <None Include="Resources\jinx.png" />
     <None Include="Resources\unknown.png" />
     <None Include="Resources\monkeyking.png" />
+    <Content Include="icon.ico" />
     <Content Include="SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
