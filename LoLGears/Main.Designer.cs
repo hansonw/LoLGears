@@ -53,6 +53,7 @@
       this.gameTable = new System.Windows.Forms.DataGridView();
       this.readmeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+      this.checkUpdatesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.tabControl.SuspendLayout();
       this.summonerPage.SuspendLayout();
@@ -106,6 +107,7 @@
       // 
       this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.readmeMenuItem,
+            this.checkUpdatesMenuItem,
             this.toolStripSeparator2,
             this.aboutMenuItem});
       this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
@@ -115,7 +117,7 @@
       // aboutMenuItem
       // 
       this.aboutMenuItem.Name = "aboutMenuItem";
-      this.aboutMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.aboutMenuItem.Size = new System.Drawing.Size(170, 22);
       this.aboutMenuItem.Text = "&About...";
       this.aboutMenuItem.Click += new System.EventHandler(this.aboutMenuItem_Click);
       // 
@@ -362,14 +364,21 @@
       // readmeMenuItem
       // 
       this.readmeMenuItem.Name = "readmeMenuItem";
-      this.readmeMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.readmeMenuItem.Size = new System.Drawing.Size(170, 22);
       this.readmeMenuItem.Text = "&Readme...";
       this.readmeMenuItem.Click += new System.EventHandler(this.readmeMenuItem_Click);
       // 
       // toolStripSeparator2
       // 
       this.toolStripSeparator2.Name = "toolStripSeparator2";
-      this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+      this.toolStripSeparator2.Size = new System.Drawing.Size(167, 6);
+      // 
+      // checkUpdatesMenuItem
+      // 
+      this.checkUpdatesMenuItem.Name = "checkUpdatesMenuItem";
+      this.checkUpdatesMenuItem.Size = new System.Drawing.Size(170, 22);
+      this.checkUpdatesMenuItem.Text = "Check for &updates";
+      this.checkUpdatesMenuItem.Click += new System.EventHandler(this.checkUpdatesMenuItem_Click);
       // 
       // Main
       // 
@@ -426,6 +435,7 @@
     private System.Windows.Forms.Button searchHelpButton;
     private System.Windows.Forms.ToolStripMenuItem readmeMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+    private System.Windows.Forms.ToolStripMenuItem checkUpdatesMenuItem;
   }
 }
 

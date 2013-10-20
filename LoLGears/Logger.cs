@@ -13,9 +13,7 @@ namespace LoLGears
         Layout = new log4net.Layout.PatternLayout(pattern),
         File = "log.txt",
         AppendToFile = true,
-        RollingStyle = log4net.Appender.RollingFileAppender.RollingMode.Composite,
-        MaxSizeRollBackups = 1,
-        MaximumFileSize = "1MB",
+        MaximumFileSize = "100KB",
         StaticLogFileName = true
       };
       appender.ActivateOptions();

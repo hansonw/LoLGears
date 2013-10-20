@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -82,6 +83,46 @@ namespace LoLGears
       summonerTable.ColumnHeadersBorderStyle = Util.ProperColumnHeadersBorderStyle;
 
       LoadLogFiles();
+      CheckForUpdates();
+    }
+
+    private void CheckForUpdates() {
+      string changelogUrl = "https://raw.github.com/hansonw/LoLGears/master/CHANGELOG.txt";
+      string downloadUrl = "https://raw.github.com/hansonw/LoLGears/master/download/LoLGears.zip";
+
+      HttpWebRequest request;
+      try {
+        request = (HttpWebRequest) WebRequest.Create(changelogUrl);
+      } catch (Exception ex) {
+        Logger.LogException(ex);
+        return;
+      }
+
+      Action updateAction = () => {
+        request.BeginGetResponse(result => {
+          try {
+            var response = (HttpWebResponse) request.EndGetResponse(result);
+            if (response.StatusCode == HttpStatusCode.OK) {
+              var reader = new StreamReader(response.GetResponseStream());
+              var latestVersion = new Version(reader.ReadLine());
+              if (latestVersion > new Version(Application.ProductVersion)) {
+                var dialogResult = MessageBox.Show("A new version of LoLGears (" + latestVersion + ") is available.\n" +
+                                                   "Would you like to download it now?",
+                                                   "Update available", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes) {
+                  Process.Start(downloadUrl);
+                }
+              }
+            }
+          } catch (WebException) {
+            // Can't reach the server. Just try again later
+          } catch (Exception ex) {
+            Logger.LogException(ex);
+          }
+        }, request);
+      };
+
+      updateAction.BeginInvoke(updateAction.EndInvoke, updateAction);
     }
 
     public void OpenSummonerDetails(string summonerName) {
@@ -476,6 +517,10 @@ namespace LoLGears
 
     private void readmeMenuItem_Click(object sender, EventArgs e) {
       Process.Start("README.txt");
+    }
+
+    private void checkUpdatesMenuItem_Click(object sender, EventArgs e) {
+      CheckForUpdates();
     }
   }
 }
