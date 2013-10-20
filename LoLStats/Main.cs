@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Be.Timvw.Framework.ComponentModel;
+using LoLStats.Properties;
 using Pietschsoft;
 
 namespace LoLStats
@@ -113,7 +115,43 @@ namespace LoLStats
       gameTable.Select();
     }
 
+    private string FindLogDirectory() {
+      string lolDir = (string)Settings.Default["LoLDirectory"];
+      while (!File.Exists(Path.Combine(lolDir, "lol.launcher.exe"))) {
+        var result = MessageBox.Show("Could not find your LoL folder. Please locate your LoL launcher (lol.launcher.exe).\n" +
+                                     "Usually, it's in a folder named Riot Games\\League of Legends.",
+                                     "Locate LoL Directory", MessageBoxButtons.OKCancel);
+        if (result == DialogResult.OK) {
+          var file = new OpenFileDialog();
+          file.InitialDirectory = Path.GetPathRoot(Directory.GetCurrentDirectory());
+          file.Filter = "LoL Launcher|lol.launcher.exe";
+          result = file.ShowDialog();
+          if (result == DialogResult.OK) {
+            lolDir = Path.GetDirectoryName(file.FileName);
+            Settings.Default["LoLDirectory"] = lolDir;
+            Settings.Default.Save();
+          } else {
+            return null;
+          }
+        } else {
+          return null;
+        }
+      }
+
+      string dir = Path.Combine(lolDir, "Logs\\Game - R3d Logs");
+      if (!Directory.Exists(dir)) {
+        MessageBox.Show("You don't seem to have any game logs - cannot generate statistics. Sorry!");
+        return null;
+      }
+      return dir;
+    }
+
     private void LoadLogFiles() {
+      var logDirectory = FindLogDirectory();
+      if (logDirectory == null) {
+        Environment.Exit(1);
+      }
+
       database = new LogDatabase();
 
       var pd = new ProgressDialog(this.Handle);
@@ -131,7 +169,7 @@ namespace LoLStats
       bg.WorkerReportsProgress = true;
       bg.WorkerSupportsCancellation = true;
       bg.DoWork += (sender, e) => {
-        database.Load("C:\\Riot Games\\League of Legends\\Logs\\Game - R3d Logs", sender as BackgroundWorker);
+        database.Load(logDirectory, sender as BackgroundWorker);
         Invoke(new Action(() => pd.Line2 = "Loading statistics..."));
         LoadData();
       };

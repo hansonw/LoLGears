@@ -22,5 +22,17 @@ namespace LoLStats.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Riot Games\\League of Legends")]
+        public string LoLDirectory {
+            get {
+                return ((string)(this["LoLDirectory"]));
+            }
+            set {
+                this["LoLDirectory"] = value;
+            }
+        }
     }
 }
