@@ -14,13 +14,21 @@ namespace LoLGears
   public partial class SummonerDetails : Form
   {
     public SummonerStats Data;
+    private List<LogData> logData;
     private Main mainForm;
     private SortableBindingList<SummonerStats.ChampionStats> championData;
 
-    public SummonerDetails(SummonerStats data, Main form) {
+    private class DeathStats
+    {
+      public string Source { get; set; }
+      public int Deaths { get; set; }
+    }
+
+    public SummonerDetails(SummonerStats data, List<LogData> logs, Main form) {
       mainForm = form;
       InitializeComponent();
       Data = data;
+      logData = logs;
 
       headerLabel.Text = data.Name;
       if (!String.IsNullOrEmpty(data.Server)) {
@@ -70,7 +78,12 @@ namespace LoLGears
 
       timeLabel.Text = "Total time logged: " + Util.FormatTime(data.TimePlayed);
 
-      championData = new SortableBindingList<SummonerStats.ChampionStats>(data.ChampStats.Values.OrderByDescending(x => x.Games));
+      LoadChampionStats();
+      LoadDeathStats();
+    }
+
+    private void LoadChampionStats() {
+      championData = new SortableBindingList<SummonerStats.ChampionStats>(Data.ChampStats.Values.OrderByDescending(x => x.Games));
       championData.SetDefaultDirection("Games", -1);
       championData.SetDefaultDirection("Wins", -1);
       championData.SetDefaultDirection("Losses", -1);
@@ -81,15 +94,39 @@ namespace LoLGears
       championTable.Columns["Wins"].HeaderText = "W";
       championTable.Columns["Losses"].HeaderText = "L";
       championTable.Columns["WinRate"].HeaderText = "WR";
-      if (data.GamesAs > 0) {
+      if (Data.GamesAs > 0) {
         championTable.Columns["DeathsPerGame"].HeaderText = "D/G";
         championTable.Columns["DeathsPerGame"].ToolTipText = "Deaths per game";
       } else {
         championTable.Columns["DeathsPerGame"].Visible = false;
       }
-      championTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
       championTable.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
       championTable.Select();
+    }
+
+    private void LoadDeathStats() {
+      if (Data.GamesAs == 0) {
+        tabControl.TabPages.Remove(deathStatsPage);
+        return;
+      }
+
+      var deaths = new Dictionary<string, int>();
+      foreach (var log in logData) {
+        if (log.PlayerName == Data.Name) {
+          var summoners = new List<Summoner>(log.BlueTeam.Concat(log.PurpleTeam));
+          foreach (var death in log.Deaths) {
+            var name = death == -1 ? "(Executed)" : summoners[death].Champion;
+            if (!deaths.ContainsKey(name)) deaths[name] = 1;
+            else deaths[name]++;
+          }
+        }
+      }
+
+      var deathData = deaths.Select(kvp => new DeathStats {Source = kvp.Key, Deaths = kvp.Value});
+      deathTable.DataSource = new SortableBindingList<DeathStats>(deathData);
+      deathTable.ColumnHeadersBorderStyle = Util.ProperColumnHeadersBorderStyle;
+      deathTable.Sort(deathTable.Columns["Deaths"], ListSortDirection.Descending);
+      deathTable.Columns["Source"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
     }
 
     private void lolkingLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {

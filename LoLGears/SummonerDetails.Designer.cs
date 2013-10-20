@@ -25,19 +25,26 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       this.headerLabel = new System.Windows.Forms.Label();
       this.recordLabel = new System.Windows.Forms.Label();
-      this.label2 = new System.Windows.Forms.Label();
       this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
       this.lolkingLink = new System.Windows.Forms.LinkLabel();
       this.closeButton = new System.Windows.Forms.Button();
-      this.championTable = new System.Windows.Forms.DataGridView();
-      this.label1 = new System.Windows.Forms.Label();
       this.gamesPlayedLabel = new System.Windows.Forms.LinkLabel();
       this.timeLabel = new System.Windows.Forms.Label();
+      this.tabControl = new System.Windows.Forms.TabControl();
+      this.championStatsPage = new System.Windows.Forms.TabPage();
+      this.championTable = new System.Windows.Forms.DataGridView();
+      this.deathStatsPage = new System.Windows.Forms.TabPage();
+      this.deathTable = new System.Windows.Forms.DataGridView();
       this.flowLayoutPanel1.SuspendLayout();
+      this.tabControl.SuspendLayout();
+      this.championStatsPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.championTable)).BeginInit();
+      this.deathStatsPage.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.deathTable)).BeginInit();
       this.SuspendLayout();
       // 
       // headerLabel
@@ -60,17 +67,6 @@
       this.recordLabel.Size = new System.Drawing.Size(270, 15);
       this.recordLabel.TabIndex = 3;
       this.recordLabel.Text = "Known record: 123-23 (with: 123-23, against: 12-2)";
-      // 
-      // label2
-      // 
-      this.label2.AutoSize = true;
-      this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label2.Location = new System.Drawing.Point(10, 110);
-      this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-      this.label2.Name = "label2";
-      this.label2.Size = new System.Drawing.Size(139, 21);
-      this.label2.TabIndex = 5;
-      this.label2.Text = "Champions Played";
       // 
       // flowLayoutPanel1
       // 
@@ -99,46 +95,13 @@
       // 
       // closeButton
       // 
-      this.closeButton.Location = new System.Drawing.Point(247, 349);
+      this.closeButton.Location = new System.Drawing.Point(257, 349);
       this.closeButton.Name = "closeButton";
       this.closeButton.Size = new System.Drawing.Size(75, 23);
       this.closeButton.TabIndex = 9;
       this.closeButton.Text = "Close";
       this.closeButton.UseVisualStyleBackColor = true;
       this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
-      // 
-      // championTable
-      // 
-      this.championTable.AllowUserToAddRows = false;
-      this.championTable.AllowUserToDeleteRows = false;
-      this.championTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.championTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
-      this.championTable.BackgroundColor = System.Drawing.Color.White;
-      this.championTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-      this.championTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-      this.championTable.ColumnHeadersHeight = 20;
-      this.championTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-      this.championTable.Location = new System.Drawing.Point(12, 137);
-      this.championTable.MultiSelect = false;
-      this.championTable.Name = "championTable";
-      this.championTable.ReadOnly = true;
-      this.championTable.RowHeadersVisible = false;
-      this.championTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.championTable.Size = new System.Drawing.Size(310, 206);
-      this.championTable.TabIndex = 11;
-      this.championTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.showChampionGames);
-      this.championTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.championTableCellFormatting);
-      // 
-      // label1
-      // 
-      this.label1.AutoSize = true;
-      this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.label1.Location = new System.Drawing.Point(155, 116);
-      this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(151, 13);
-      this.label1.TabIndex = 12;
-      this.label1.Text = "(double click to view games)";
       // 
       // gamesPlayedLabel
       // 
@@ -162,19 +125,99 @@
       this.timeLabel.TabIndex = 14;
       this.timeLabel.Text = "Total time logged: 1d 2h 3m";
       // 
+      // tabControl
+      // 
+      this.tabControl.Controls.Add(this.championStatsPage);
+      this.tabControl.Controls.Add(this.deathStatsPage);
+      this.tabControl.Location = new System.Drawing.Point(14, 110);
+      this.tabControl.Name = "tabControl";
+      this.tabControl.SelectedIndex = 0;
+      this.tabControl.Size = new System.Drawing.Size(318, 233);
+      this.tabControl.TabIndex = 15;
+      // 
+      // championStatsPage
+      // 
+      this.championStatsPage.BackColor = System.Drawing.SystemColors.ControlLight;
+      this.championStatsPage.Controls.Add(this.championTable);
+      this.championStatsPage.Location = new System.Drawing.Point(4, 24);
+      this.championStatsPage.Name = "championStatsPage";
+      this.championStatsPage.Padding = new System.Windows.Forms.Padding(3);
+      this.championStatsPage.Size = new System.Drawing.Size(310, 205);
+      this.championStatsPage.TabIndex = 0;
+      this.championStatsPage.Text = "Champion Stats";
+      this.championStatsPage.UseVisualStyleBackColor = true;
+      // 
+      // championTable
+      // 
+      this.championTable.AllowUserToAddRows = false;
+      this.championTable.AllowUserToDeleteRows = false;
+      this.championTable.AllowUserToResizeRows = false;
+      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.championTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+      this.championTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+      this.championTable.BackgroundColor = System.Drawing.Color.White;
+      this.championTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.championTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+      this.championTable.ColumnHeadersHeight = 20;
+      this.championTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+      this.championTable.Location = new System.Drawing.Point(3, 3);
+      this.championTable.Margin = new System.Windows.Forms.Padding(0);
+      this.championTable.MultiSelect = false;
+      this.championTable.Name = "championTable";
+      this.championTable.ReadOnly = true;
+      this.championTable.RowHeadersVisible = false;
+      this.championTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.championTable.Size = new System.Drawing.Size(304, 199);
+      this.championTable.TabIndex = 12;
+      this.championTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.showChampionGames);
+      this.championTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.championTableCellFormatting);
+      // 
+      // deathStatsPage
+      // 
+      this.deathStatsPage.BackColor = System.Drawing.SystemColors.ControlLight;
+      this.deathStatsPage.Controls.Add(this.deathTable);
+      this.deathStatsPage.Location = new System.Drawing.Point(4, 24);
+      this.deathStatsPage.Name = "deathStatsPage";
+      this.deathStatsPage.Padding = new System.Windows.Forms.Padding(3);
+      this.deathStatsPage.Size = new System.Drawing.Size(310, 205);
+      this.deathStatsPage.TabIndex = 1;
+      this.deathStatsPage.Text = "Death Stats";
+      this.deathStatsPage.UseVisualStyleBackColor = true;
+      // 
+      // deathTable
+      // 
+      this.deathTable.AllowUserToAddRows = false;
+      this.deathTable.AllowUserToDeleteRows = false;
+      this.deathTable.AllowUserToResizeRows = false;
+      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.deathTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+      this.deathTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+      this.deathTable.BackgroundColor = System.Drawing.Color.White;
+      this.deathTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.deathTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+      this.deathTable.ColumnHeadersHeight = 20;
+      this.deathTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+      this.deathTable.Location = new System.Drawing.Point(3, 3);
+      this.deathTable.Margin = new System.Windows.Forms.Padding(0);
+      this.deathTable.MultiSelect = false;
+      this.deathTable.Name = "deathTable";
+      this.deathTable.ReadOnly = true;
+      this.deathTable.RowHeadersVisible = false;
+      this.deathTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+      this.deathTable.Size = new System.Drawing.Size(304, 199);
+      this.deathTable.TabIndex = 13;
+      // 
       // SummonerDetails
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.AutoSize = true;
-      this.ClientSize = new System.Drawing.Size(334, 384);
+      this.ClientSize = new System.Drawing.Size(344, 384);
+      this.Controls.Add(this.tabControl);
       this.Controls.Add(this.timeLabel);
       this.Controls.Add(this.gamesPlayedLabel);
-      this.Controls.Add(this.label1);
-      this.Controls.Add(this.championTable);
       this.Controls.Add(this.closeButton);
       this.Controls.Add(this.flowLayoutPanel1);
-      this.Controls.Add(this.label2);
       this.Controls.Add(this.recordLabel);
       this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -183,7 +226,11 @@
       this.Text = "Summoner Details";
       this.flowLayoutPanel1.ResumeLayout(false);
       this.flowLayoutPanel1.PerformLayout();
+      this.tabControl.ResumeLayout(false);
+      this.championStatsPage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.championTable)).EndInit();
+      this.deathStatsPage.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.deathTable)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -193,13 +240,15 @@
 
     private System.Windows.Forms.Label headerLabel;
     private System.Windows.Forms.Label recordLabel;
-    private System.Windows.Forms.Label label2;
     private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     private System.Windows.Forms.LinkLabel lolkingLink;
     private System.Windows.Forms.Button closeButton;
-    private System.Windows.Forms.DataGridView championTable;
-    private System.Windows.Forms.Label label1;
     private System.Windows.Forms.LinkLabel gamesPlayedLabel;
     private System.Windows.Forms.Label timeLabel;
+    private System.Windows.Forms.TabControl tabControl;
+    private System.Windows.Forms.TabPage championStatsPage;
+    private System.Windows.Forms.DataGridView championTable;
+    private System.Windows.Forms.TabPage deathStatsPage;
+    private System.Windows.Forms.DataGridView deathTable;
   }
 }

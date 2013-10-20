@@ -83,7 +83,7 @@ namespace LoLGears
 
     public void OpenSummonerDetails(string summonerName) {
       if (summoners != null && summoners.ContainsKey(summonerName)) {
-        new SummonerDetails(summoners[summonerName], this).Show();
+        new SummonerDetails(summoners[summonerName], logData, this).Show();
       }
     }
 
@@ -208,10 +208,17 @@ namespace LoLGears
       foreach (var row in logData) {
         foreach (var x in row.BlueTeam.Concat(row.PurpleTeam)) {
           if (!x.IsBot && (!row.BotGame || !x.Name.EndsWith(" Bot"))) {
-            if (!summoners.ContainsKey(x.Name)) {
-              summoners[x.Name] = new SummonerStats(x.Name);
+            var key = x.Name;
+            // Is this someone on a different server?
+            if (summoners.ContainsKey(x.Name) && !String.IsNullOrEmpty(row.Server) && !String.IsNullOrEmpty(summoners[x.Name].Server)) {
+              if (row.Server != summoners[x.Name].Server) {
+                key = x.Name + "_" + row.Server;
+              }
             }
-            summoners[x.Name].AddGame(row);
+            if (!summoners.ContainsKey(key)) {
+              summoners[key] = new SummonerStats(x.Name);
+            }
+            summoners[key].AddGame(row);
           }
         }
       }
@@ -436,7 +443,7 @@ namespace LoLGears
 
     private void viewSummonerDetails(object sender, DataGridViewCellEventArgs e) {
       if (e.RowIndex >= 0 && e.RowIndex < summonerData.Count) {
-        new SummonerDetails(summonerData[e.RowIndex], this).Show();
+        new SummonerDetails(summonerData[e.RowIndex], logData, this).Show();
       }
     }
 

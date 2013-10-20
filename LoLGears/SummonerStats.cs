@@ -9,7 +9,7 @@ namespace LoLGears
   public class SummonerStats
   {
     public string Name { get; set; }
-    public string Server;
+    public string Server { get; set; }
 
     public int Games { get; set; }
     public int GamesAs;
