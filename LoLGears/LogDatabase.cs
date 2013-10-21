@@ -67,7 +67,7 @@ namespace LoLGears
               }
 
               var data = parser.ParseLog(file);
-              worker.ReportProgress(index*100/length, new int[] {index - start + 1, length});
+              worker.ReportProgress((index-start+1)*100/length, new int[] {index - start + 1, length});
               if (data != null) {
                 if (rows.Count > 0) {
                   LogData lastLog = rows.Last();
