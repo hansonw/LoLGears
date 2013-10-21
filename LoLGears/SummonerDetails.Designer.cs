@@ -25,8 +25,8 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SummonerDetails));
       this.headerLabel = new System.Windows.Forms.Label();
       this.recordLabel = new System.Windows.Forms.Label();
@@ -153,8 +153,8 @@
       this.championTable.AllowUserToAddRows = false;
       this.championTable.AllowUserToDeleteRows = false;
       this.championTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.championTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.championTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
       this.championTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
       this.championTable.BackgroundColor = System.Drawing.Color.White;
       this.championTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -190,8 +190,8 @@
       this.deathTable.AllowUserToAddRows = false;
       this.deathTable.AllowUserToDeleteRows = false;
       this.deathTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.deathTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.deathTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
       this.deathTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
       this.deathTable.BackgroundColor = System.Drawing.Color.White;
       this.deathTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
