@@ -253,18 +253,15 @@
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="BeforeBuild">
   </Target>
-  <!-- Code to merge the assemblies into one:setup.exe -->
-  <UsingTask TaskName="ILMerge.MSBuild.Tasks.ILMerge" AssemblyFile="$(SolutionDir)\packages\ILMerge.MSBuild.Tasks.1.0.0.3\tools\ILMerge.MSBuild.Tasks.dll" />
   <Target Name="AfterBuild">
-    <ItemGroup>
-      <MergeAsm Include="$(OutputPath)$(TargetFileName)" />
-      <MergeAsm Include="$(OutputPath)System.Data.SQLite.dll" />
-      <MergeAsm Include="$(OutputPath)log4net.dll" />
-    </ItemGroup>
-    <PropertyGroup>
-      <MergedAssembly>$(ProjectDir)$(OutDir)LoLGearsMerged.exe</MergedAssembly>
-    </PropertyGroup>
-    <Message Text="ILMerge @(MergeAsm) -&gt; $(MergedAssembly)" Importance="high" />
-    <ILMerge InputAssemblies="@(MergeAsm)" OutputFile="$(MergedAssembly)" TargetKind="SameAsPrimaryAssembly" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>"$(SolutionDir)packages\ilmerge.2.13.0307\ilmerge" /target:winexe /out:merged_$(TargetFileName) $(TargetFileName) System.Data.SQLite.dll log4net.dll
+mv merged_$(TargetFileName) "$(ProjectDir)..\download\$(TargetFileName)"
+7z u -mx9 "$(ProjectDir)..\download\$(ProjectName).zip" "$(ProjectDir)..\download\$(TargetFileName)" "$(SolutionDir)README.txt" SQLite.Interop.dll &gt; 7z.log.txt</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>
