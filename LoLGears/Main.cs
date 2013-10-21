@@ -231,6 +231,10 @@ namespace LoLGears
         pd.Line2 = String.Format("Loading new logs... ({0}/{1})", status[0], status[1]);
       };
       bg.RunWorkerCompleted += (sender, e) => {
+        if (e.Error != null) {
+          Logger.LogException(e.Error);
+        }
+
         pd.CloseDialog();
         // Bring to front; closing the dialog seems to send the window to the back.
         TopMost = true;

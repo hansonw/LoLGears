@@ -148,16 +148,20 @@ namespace LoLGears
     }
 
     public LogData Get(long id) {
-      using (var sqlConnection = new SQLiteConnection(connectionString)) {
-        sqlConnection.Open();
-        using (var command = sqlConnection.CreateCommand()) {
-          command.CommandText = "SELECT * FROM games WHERE id = @id";
-          command.Parameters.Add(new SQLiteParameter("@id", id));
-          var reader = command.ExecuteReader();
-          if (reader.Read()) {
-            return GetDataFromRow(reader);
+      try {
+        using (var sqlConnection = new SQLiteConnection(connectionString)) {
+          sqlConnection.Open();
+          using (var command = sqlConnection.CreateCommand()) {
+            command.CommandText = "SELECT * FROM games WHERE id = @id";
+            command.Parameters.Add(new SQLiteParameter("@id", id));
+            var reader = command.ExecuteReader();
+            if (reader.Read()) {
+              return GetDataFromRow(reader);
+            }
           }
         }
+      } catch (Exception ex) {
+        Logger.LogException(ex);
       }
 
       return null;
@@ -169,76 +173,80 @@ namespace LoLGears
       var playedCount = new Dictionary<string, int>();
       var summonerCount = new Dictionary<string, int>();
 
-      using (var sqlConnection = new SQLiteConnection(connectionString)) {
-        sqlConnection.Open();
-        using (var command = sqlConnection.CreateCommand()) {
-          command.CommandText = "SELECT * FROM games ORDER BY id DESC";
+      try {
+        using (var sqlConnection = new SQLiteConnection(connectionString)) {
+          sqlConnection.Open();
+          using (var command = sqlConnection.CreateCommand()) {
+            command.CommandText = "SELECT * FROM games ORDER BY id DESC";
 
-          var reader = command.ExecuteReader();
+            var reader = command.ExecuteReader();
 
-          int numRows = files.Length;
-          int tick = numRows/100;
+            int numRows = files.Length;
+            int tick = numRows/100;
 
-          while (reader.Read()) {
-            var id = (long) reader["id"];
-            var data = GetDataFromRow(reader);
+            while (reader.Read()) {
+              var id = (long) reader["id"];
+              var data = GetDataFromRow(reader);
 
-            int count;
-            if (data.PlayerName != "") {
-              playedCount.TryGetValue(data.PlayerName, out count);
-              playedCount[data.PlayerName] = count + 1;
-            }
+              int count;
+              if (data.PlayerName != "") {
+                playedCount.TryGetValue(data.PlayerName, out count);
+                playedCount[data.PlayerName] = count + 1;
+              }
 
-            foreach (var summoner in data.BlueTeam.Concat(data.PurpleTeam)) {
-              summonerCount.TryGetValue(summoner.Name, out count);
-              summonerCount[summoner.Name] = count + 1;
-            }
+              foreach (var summoner in data.BlueTeam.Concat(data.PurpleTeam)) {
+                summonerCount.TryGetValue(summoner.Name, out count);
+                summonerCount[summoner.Name] = count + 1;
+              }
 
-            result.Add(data);
-            if (!data.Spectated && data.PlayerName == "") {
-              unknown[id] = data;
-            }
-          }
-        }
-
-        // If any games have unknown players, update them now.
-        if (unknown.Count > 0) {
-          using (var transaction = sqlConnection.BeginTransaction()) {
-            using (var command = sqlConnection.CreateCommand()) {
-              command.Transaction = transaction;
-              command.CommandText = "UPDATE games SET player_name = @player_name WHERE id = @id";
-              command.Parameters.Add(new SQLiteParameter("@player_name", System.Data.DbType.String));
-              command.Parameters.Add(new SQLiteParameter("@id", System.Data.DbType.Int64));
-
-              foreach (var kvp in unknown) {
-                var id = kvp.Key;
-                var row = kvp.Value;
-
-                long max = 0;
-                string bestMatch = "";
-
-                // Take the most confirmed played. If we've never confirmed playing on one of these,
-                // take the summoner name that appears the most
-                foreach (var sum in row.BlueTeam.Concat(row.PurpleTeam)) {
-                  if (playedCount.ContainsKey(sum.Name) && playedCount[sum.Name]*100000L > max) {
-                    max = playedCount[sum.Name]*100000L;
-                    bestMatch = sum.Name;
-                  }
-                  if (summonerCount[sum.Name] > max) {
-                    max = summonerCount[sum.Name];
-                    bestMatch = sum.Name;
-                  }
-                }
-
-                row.PlayerName = bestMatch;
-                command.Parameters[0].Value = bestMatch;
-                command.Parameters[1].Value = id;
-                command.ExecuteNonQuery();
+              result.Add(data);
+              if (!data.Spectated && data.PlayerName == "") {
+                unknown[id] = data;
               }
             }
-            transaction.Commit();
+          }
+
+          // If any games have unknown players, update them now.
+          if (unknown.Count > 0) {
+            using (var transaction = sqlConnection.BeginTransaction()) {
+              using (var command = sqlConnection.CreateCommand()) {
+                command.Transaction = transaction;
+                command.CommandText = "UPDATE games SET player_name = @player_name WHERE id = @id";
+                command.Parameters.Add(new SQLiteParameter("@player_name", System.Data.DbType.String));
+                command.Parameters.Add(new SQLiteParameter("@id", System.Data.DbType.Int64));
+
+                foreach (var kvp in unknown) {
+                  var id = kvp.Key;
+                  var row = kvp.Value;
+
+                  long max = 0;
+                  string bestMatch = "";
+
+                  // Take the most confirmed played. If we've never confirmed playing on one of these,
+                  // take the summoner name that appears the most
+                  foreach (var sum in row.BlueTeam.Concat(row.PurpleTeam)) {
+                    if (playedCount.ContainsKey(sum.Name) && playedCount[sum.Name]*100000L > max) {
+                      max = playedCount[sum.Name]*100000L;
+                      bestMatch = sum.Name;
+                    }
+                    if (summonerCount[sum.Name] > max) {
+                      max = summonerCount[sum.Name];
+                      bestMatch = sum.Name;
+                    }
+                  }
+
+                  row.PlayerName = bestMatch;
+                  command.Parameters[0].Value = bestMatch;
+                  command.Parameters[1].Value = id;
+                  command.ExecuteNonQuery();
+                }
+              }
+              transaction.Commit();
+            }
           }
         }
+      } catch (Exception ex) {
+        Logger.LogException(ex);
       }
 
       return result;
