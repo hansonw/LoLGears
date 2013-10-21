@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -175,7 +176,7 @@ namespace LoLGears
           if (parts.Length != 5) continue;
 
           double timeStamp = 0;
-          if (!double.TryParse(parts[0].Trim(), out timeStamp)) {
+          if (!double.TryParse(parts[0].Trim(), NumberStyles.Number, new CultureInfo("en-US"), out timeStamp)) {
             // This line is corrupted. Ignore it
             continue;
           }
