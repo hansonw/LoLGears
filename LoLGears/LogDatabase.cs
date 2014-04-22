@@ -274,7 +274,7 @@ namespace LoLGears
         Spectated = (bool) reader["spectated"],
         BotGame = (bool) reader["bot_game"],
         GameVersion = new Version((string) reader["game_version"]),
-        Map = (string) reader["map"],
+        Map = reader["map"].Equals(DBNull.Value) ? "Unknown Map" : (string) reader["map"],
         BlueTeam = SplitObjects((string) reader["blue_team"], Summoner.Parse),
         PurpleTeam = SplitObjects((string) reader["purple_team"], Summoner.Parse),
         PlayerName = (string) reader["player_name"],
