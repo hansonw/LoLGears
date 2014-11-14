@@ -88,7 +88,7 @@ namespace LoLGears
 
     private void CheckForUpdates() {
       string changelogUrl = "https://raw.github.com/hansonw/LoLGears/master/CHANGELOG.txt";
-      string downloadUrl = "https://raw.github.com/hansonw/LoLGears/master/download/LoLGears.zip";
+      string downloadUrl = "https://github.com/hansonw/LoLGears/releases/download/{0}/LoLGears.zip";
 
       HttpWebRequest request;
       try {
@@ -110,7 +110,7 @@ namespace LoLGears
                                                    "Would you like to download it now?",
                                                    "Update available", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes) {
-                  Process.Start(downloadUrl);
+                  Process.Start(String.Format(downloadUrl, latestVersion));
                 }
               }
             }
