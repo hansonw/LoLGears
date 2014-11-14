@@ -93,6 +93,7 @@ namespace LoLGears
     // - 1.0.0.143 - skin ID starts getting logged.
     // - 3.01.0.1 (2013-02-01) - clientID starts getting logged, allowing us to definitively discern who the player is
     // - 3.10.0.237 (2013-07-31) - exit code starts getting logged, allowing us to know the result of the game.
+    // - 4.5.0.260 - (2014-04-04) - map is no longer logged, but we can infer it from GameMode Mutator strings
 
     public static Dictionary<int, string> MapDictionary = new Dictionary<int, string>() {
       {1, "Summoner's Rift"},
@@ -131,6 +132,8 @@ namespace LoLGears
     public Regex GAME_ID_REGEX = new Regex("Receiving PKT_World_SendGameNumber, GameID[: ]+([0-9a-zA-Z]+)(.*?PlatformID: ([A-Z]+))?", RegexOptions.Compiled);
     public Regex BUILD_REGEX = new Regex("Build Version: Version ([0-9\\.]+)", RegexOptions.Compiled);
     public Regex MAP_REGEX = new Regex("Adding level zip file: Map([0-9]+).zip", RegexOptions.Compiled);
+    public Regex GAME_MODE_REGEX = new Regex(@"Initializing GameModeComponents for mode=(.+)\.", RegexOptions.Compiled);
+    public Regex GAME_MUTATOR_REGEX = new Regex(@"\.\.\. Processing GameMode Mutator = (.+)\.", RegexOptions.Compiled);
     public Regex NET_UID_REGEX = new Regex("netUID: ([0-9]+)", RegexOptions.Compiled);
     public Regex KILLER_REGEX = new Regex("The Killer was: (.*)", RegexOptions.Compiled);
     public Regex EXITCODE_REGEX = new Regex("EXITCODE_([A-Z]+)", RegexOptions.Compiled);
@@ -155,6 +158,8 @@ namespace LoLGears
         ret.LogFile = filename;
 
         string line;
+        string gameMode = "";
+        HashSet<string> gameMutators = new HashSet<string>();
         while ((line = stream.ReadLine()) != null) {
           string[] parts = line.Split(new char[] {'|'}, 5, StringSplitOptions.None);
           if (parts.Length == 1) {
@@ -240,6 +245,12 @@ namespace LoLGears
                 ret.ExitCode = LogData.ExitCodes.LEAVE;
                 break;
             }
+          } else if ((match = GAME_MODE_REGEX.Match(text)).Success) {
+            gameMode = match.Groups[1].Value.ToLower();
+          } else if ((match = GAME_MUTATOR_REGEX.Match(text)).Success) {
+            gameMutators.Add(match.Groups[1].Value.ToLower());
+          } else if (text.Contains("TwistedAura.dds")) {
+            ret.Map = "Twisted Treeline"; // 3v3 doesn't have a special game mode, but this texture gets loaded
           } else {
             if (ret.GameVersion >= CLIENT_ID_VERSION) {
               match = CHAMPION_REGEX1.Match(text);
@@ -289,6 +300,26 @@ namespace LoLGears
               }
             }
           }
+        }
+
+        if (ret.Map == null) {
+          if (gameMode == "classic") {
+            ret.Map = "Summoner's Rift";
+            if (gameMutators.Contains("urf")) {
+              ret.Map += " (URF)";
+            }
+          } else if (gameMode == "aram") {
+            ret.Map = "Howling Abyss";
+          } else if (gameMode == "odin") {
+            ret.Map = "Crystal Scar";
+          } else if (gameMode == "ascension") {
+            ret.Map = "Crystal Scar (Ascension)";
+          }
+        }
+        
+        // Overrides existing Twisted Treeline detection.
+        if (gameMutators.Contains("6v6")) {
+          ret.Map = "Twisted Treeline (Hexakill)";
         }
 
         if (startTime == -1) {

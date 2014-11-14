@@ -30,6 +30,10 @@ namespace LoLGears
           )";
           command.ExecuteNonQuery();
         }
+        using (var command = sqlConnection.CreateCommand()) {
+          command.CommandText = @"DELETE FROM games WHERE map IS null";
+          command.ExecuteNonQuery();
+        }
       }
     }
 

@@ -142,11 +142,17 @@
   <data name="ashe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ashe.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="azir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\azir.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="blitzcrank" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\blitzcrank.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="brand" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\brand.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="braum" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\braum.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="caitlyn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\caitlyn.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -198,6 +204,9 @@
   </data>
   <data name="garen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\garen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gnar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gnar.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="gragas" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gragas.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -430,6 +439,9 @@
   <data name="veigar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\veigar.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="velkoz" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\velkoz.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="vi" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\vi.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -453,6 +465,9 @@
   </data>
   <data name="xinzhao" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\xinzhao.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="yasuo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\yasuo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="yorick" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\yorick.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

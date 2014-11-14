@@ -1,3 +1,8 @@
+1.0.0.2
+====================
+Add back the ability to determine the map again, including Hexakill/URF/Ascension game modes!
+Also update/add champion icons (Azir, Braum, Gnar, Velkoz, Yasuo)
+
 1.0.0.1
 ====================
 Unfortunately, it seems that the map cannot be parsed anymore.

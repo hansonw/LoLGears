@@ -74,6 +74,7 @@
       // 
       // blueTeamFlow
       // 
+      this.blueTeamFlow.AutoSize = true;
       this.blueTeamFlow.Location = new System.Drawing.Point(9, 80);
       this.blueTeamFlow.Margin = new System.Windows.Forms.Padding(0, 10, 3, 3);
       this.blueTeamFlow.Name = "blueTeamFlow";
@@ -82,6 +83,7 @@
       // 
       // purpleTeamFlow
       // 
+      this.purpleTeamFlow.AutoSize = true;
       this.purpleTeamFlow.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
       this.purpleTeamFlow.Location = new System.Drawing.Point(285, 80);
       this.purpleTeamFlow.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
@@ -119,7 +121,8 @@
       // 
       // closeButton
       // 
-      this.closeButton.Location = new System.Drawing.Point(450, 230);
+      this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.closeButton.Location = new System.Drawing.Point(450, 229);
       this.closeButton.Margin = new System.Windows.Forms.Padding(0);
       this.closeButton.Name = "closeButton";
       this.closeButton.Size = new System.Drawing.Size(75, 23);
@@ -130,9 +133,10 @@
       // 
       // deathsLabel
       // 
+      this.deathsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.deathsLabel.AutoSize = true;
       this.deathsLabel.LinkArea = new System.Windows.Forms.LinkArea(0, 0);
-      this.deathsLabel.Location = new System.Drawing.Point(9, 203);
+      this.deathsLabel.Location = new System.Drawing.Point(9, 202);
       this.deathsLabel.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
       this.deathsLabel.Name = "deathsLabel";
       this.deathsLabel.Size = new System.Drawing.Size(157, 15);
@@ -142,7 +146,8 @@
       // 
       // viewGameLogButton
       // 
-      this.viewGameLogButton.Location = new System.Drawing.Point(10, 230);
+      this.viewGameLogButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.viewGameLogButton.Location = new System.Drawing.Point(10, 229);
       this.viewGameLogButton.Name = "viewGameLogButton";
       this.viewGameLogButton.Size = new System.Drawing.Size(113, 23);
       this.viewGameLogButton.TabIndex = 9;
@@ -154,7 +159,7 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(534, 262);
+      this.ClientSize = new System.Drawing.Size(534, 261);
       this.Controls.Add(this.viewGameLogButton);
       this.Controls.Add(this.deathsLabel);
       this.Controls.Add(this.closeButton);

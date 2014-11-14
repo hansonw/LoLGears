@@ -84,6 +84,11 @@ namespace LoLGears
       foreach (var summoner in Game.PurpleTeam) {
         AddSummoner(summoner, purpleTeamFlow, false, summoner.Name == Game.PlayerName);
       }
+
+      // for Hexakill
+      if (Game.BlueTeam.Count > 5 || Game.PurpleTeam.Count > 5) {
+        this.Height += 22;
+      }     
     }
 
     private void AddSummoner(Summoner s, FlowLayoutPanel flow, bool leftSide, bool isPlayer) {
