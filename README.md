@@ -1,18 +1,21 @@
 LoLGears
 ========
 
-App that tracks your lifetime game history based on LoL's debug logs.
-These can usually be found in:
-  C:\Riot Games\League of Legends\Logs\Game - R3d logs.
+App that tracks your lifetime game history based on LoL's debug logs. 
+  
+![Summoner List](http://i.imgur.com/f2SBstW.png)
+![Game History](http://i.imgur.com/9NFLYxL.png)
+More screenshots at http://imgur.com/a/RTlrk
+Reddit post: http://www.reddit.com/r/leagueoflegends/comments/1oulw8/lolgears_a_program_that_shows_you_stats_for/
 
 Features:
-- Full game listing, including summoners, champions, death logs + win/loss.
-  (For some reason, every log has all death recaps..)
+- Full game listing, including summoners, champions, death logs + win/loss records.
 - Aggregated statistics of all summoners you've played with.
 - Detailed summoner statistics, including record as/with/against.
 
 Notes and Limitations:
-- If you've re-formatted / deleted the LoL directory at some point,
+- Uses log files in `C:\Riot Games\League of Legends\Logs\Game - R3d logs`.  
+  If you've re-formatted / deleted the LoL directory at some point,
   statistics for games before then won't be available.
 - It doesn't seem possible to distinguish between ranked/normal/customs.
 - There is no way to track a summoner across name changes.
