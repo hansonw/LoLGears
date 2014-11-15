@@ -5,7 +5,7 @@ App that tracks your lifetime game history based on LoL's debug logs.
   
 ![Summoner List](http://i.imgur.com/f2SBstW.png)
 ![Game History](http://i.imgur.com/9NFLYxL.png)
-More screenshots at http://imgur.com/a/RTlrk
+More screenshots at http://imgur.com/a/RTlrk  
 Reddit post: http://www.reddit.com/r/leagueoflegends/comments/1oulw8/lolgears_a_program_that_shows_you_stats_for/
 
 Features:
