@@ -1,12 +1,13 @@
 LoLGears
 ========
 
-App that tracks your lifetime game history based on LoL's debug logs. 
+Windows app that tracks your lifetime game history based on LoL's debug logs.  
+Download here: https://github.com/hansonw/LoLGears/releases
   
 ![Summoner List](http://i.imgur.com/f2SBstW.png)
 ![Game History](http://i.imgur.com/9NFLYxL.png)
 More screenshots at http://imgur.com/a/RTlrk  
-Reddit post: http://www.reddit.com/r/leagueoflegends/comments/1oulw8/lolgears_a_program_that_shows_you_stats_for/
+Reddit post: http://www.reddit.com/r/leagueoflegends/comments/1oulw8
 
 Features:
 - Full game listing, including summoners, champions, death logs + win/loss records.
