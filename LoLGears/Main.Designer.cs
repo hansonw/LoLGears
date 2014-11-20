@@ -25,8 +25,8 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -34,6 +34,8 @@
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.checkUpdatesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.tabControl = new System.Windows.Forms.TabControl();
       this.summonerPage = new System.Windows.Forms.TabPage();
@@ -52,9 +54,6 @@
       this.label1 = new System.Windows.Forms.Label();
       this.mapComboBox = new System.Windows.Forms.ComboBox();
       this.gameTable = new System.Windows.Forms.DataGridView();
-      this.readmeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-      this.checkUpdatesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.tabControl.SuspendLayout();
       this.summonerPage.SuspendLayout();
@@ -107,13 +106,24 @@
       // helpToolStripMenuItem
       // 
       this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.readmeMenuItem,
             this.checkUpdatesMenuItem,
             this.toolStripSeparator2,
             this.aboutMenuItem});
       this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
       this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
       this.helpToolStripMenuItem.Text = "&Help";
+      // 
+      // checkUpdatesMenuItem
+      // 
+      this.checkUpdatesMenuItem.Name = "checkUpdatesMenuItem";
+      this.checkUpdatesMenuItem.Size = new System.Drawing.Size(170, 22);
+      this.checkUpdatesMenuItem.Text = "Check for &updates";
+      this.checkUpdatesMenuItem.Click += new System.EventHandler(this.checkUpdatesMenuItem_Click);
+      // 
+      // toolStripSeparator2
+      // 
+      this.toolStripSeparator2.Name = "toolStripSeparator2";
+      this.toolStripSeparator2.Size = new System.Drawing.Size(167, 6);
       // 
       // aboutMenuItem
       // 
@@ -153,8 +163,8 @@
       this.summonerTable.AllowUserToAddRows = false;
       this.summonerTable.AllowUserToDeleteRows = false;
       this.summonerTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.summonerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
       this.summonerTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -339,8 +349,8 @@
       this.gameTable.AllowUserToAddRows = false;
       this.gameTable.AllowUserToDeleteRows = false;
       this.gameTable.AllowUserToResizeRows = false;
-      dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      this.gameTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
       this.gameTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -361,25 +371,6 @@
       this.gameTable.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gameTableCellFormatting);
       this.gameTable.CurrentCellChanged += new System.EventHandler(this.gameTableCellChange);
       this.gameTable.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataBindingComplete);
-      // 
-      // readmeMenuItem
-      // 
-      this.readmeMenuItem.Name = "readmeMenuItem";
-      this.readmeMenuItem.Size = new System.Drawing.Size(170, 22);
-      this.readmeMenuItem.Text = "&Readme...";
-      this.readmeMenuItem.Click += new System.EventHandler(this.readmeMenuItem_Click);
-      // 
-      // toolStripSeparator2
-      // 
-      this.toolStripSeparator2.Name = "toolStripSeparator2";
-      this.toolStripSeparator2.Size = new System.Drawing.Size(167, 6);
-      // 
-      // checkUpdatesMenuItem
-      // 
-      this.checkUpdatesMenuItem.Name = "checkUpdatesMenuItem";
-      this.checkUpdatesMenuItem.Size = new System.Drawing.Size(170, 22);
-      this.checkUpdatesMenuItem.Text = "Check for &updates";
-      this.checkUpdatesMenuItem.Click += new System.EventHandler(this.checkUpdatesMenuItem_Click);
       // 
       // Main
       // 
@@ -435,7 +426,6 @@
     private System.Windows.Forms.Button resetButton;
     private System.Windows.Forms.Button goButton;
     private System.Windows.Forms.Button searchHelpButton;
-    private System.Windows.Forms.ToolStripMenuItem readmeMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     private System.Windows.Forms.ToolStripMenuItem checkUpdatesMenuItem;
   }

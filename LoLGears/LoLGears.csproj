@@ -246,6 +246,7 @@
     <Content Include="Resources\azir.png" />
     <Content Include="Resources\braum.png" />
     <Content Include="Resources\gnar.png" />
+    <None Include="Resources\kalista.png" />
     <Content Include="Resources\velkoz.png" />
     <Content Include="Resources\yasuo.png" />
     <Content Include="SQLite.Interop.dll">
@@ -262,7 +263,7 @@
   <PropertyGroup>
     <PostBuildEvent>"$(SolutionDir)packages\ilmerge.2.13.0307\ilmerge" /target:winexe /out:merged_$(TargetFileName) $(TargetFileName) System.Data.SQLite.dll log4net.dll
 move merged_$(TargetFileName) "$(ProjectDir)..\download\$(TargetFileName)"
-7z u -mx9 "$(ProjectDir)..\download\$(ProjectName).zip" "$(ProjectDir)..\download\$(TargetFileName)" "$(SolutionDir)README.txt" SQLite.Interop.dll &gt; 7z.log.txt</PostBuildEvent>
+7z u -mx9 "$(ProjectDir)..\download\$(ProjectName).zip" "$(ProjectDir)..\download\$(TargetFileName)" "$(SolutionDir)README.md" SQLite.Interop.dll &gt; 7z.log.txt</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

@@ -519,10 +519,6 @@ namespace LoLGears
         "- Any combination of the above.", "Advanced Search");
     }
 
-    private void readmeMenuItem_Click(object sender, EventArgs e) {
-      Process.Start("README.txt");
-    }
-
     private void checkUpdatesMenuItem_Click(object sender, EventArgs e) {
       CheckForUpdates();
     }

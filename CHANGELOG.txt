@@ -1,3 +1,9 @@
+1.0.0.3
+====================
+- Fixes for patch 4.20
+- Detect beta Summoner's Rift map
+- Add image for Kalista
+
 1.0.0.2
 ====================
 Add back the ability to determine the map again, including Hexakill/URF/Ascension game modes!

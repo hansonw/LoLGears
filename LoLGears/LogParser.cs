@@ -210,7 +210,7 @@ namespace LoLGears
           } else if (text.Contains("Started ReplayDownloadManager")) {
             // indicates that this was a spectated game.
             ret.Spectated = true;
-          } else if (text == "PKT_StartGame") {
+          } else if (text == "GAMESTATE_GAMELOOP Begin") {
             // this indicates the game actually loaded.
             startTime = timeStamp;
             Debug.Assert(!startDate.Equals(new DateTime()), "Game started with undefined start date");
@@ -251,6 +251,8 @@ namespace LoLGears
             gameMutators.Add(match.Groups[1].Value.ToLower());
           } else if (text.Contains("TwistedAura.dds")) {
             ret.Map = "Twisted Treeline"; // 3v3 doesn't have a special game mode, but this texture gets loaded
+          } else if (text.Contains(" SRUAP_")) {
+            ret.Map = "Summoner's Rift (New)";
           } else {
             if (ret.GameVersion >= CLIENT_ID_VERSION) {
               match = CHAMPION_REGEX1.Match(text);

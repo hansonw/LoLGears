@@ -75,7 +75,7 @@ namespace LoLGears
               if (data != null) {
                 if (rows.Count > 0) {
                   LogData lastLog = rows.Last();
-                  if (lastLog.GameID == data.GameID && lastLog.Spectated == data.Spectated) {
+                  if (data.GameID != null && lastLog.GameID == data.GameID && lastLog.Spectated == data.Spectated) {
                     // Merge these games together.
                     lastLog.GameLength = (int) (data.GameStartDate - lastLog.GameStartDate).TotalSeconds + data.GameLength;
                     lastLog.ExitCode = data.ExitCode;
@@ -191,6 +191,9 @@ namespace LoLGears
             while (reader.Read()) {
               var id = (long) reader["id"];
               var data = GetDataFromRow(reader);
+              if (data == null) {
+                continue;
+              }
 
               int count;
               if (data.PlayerName != "") {
@@ -267,24 +270,38 @@ namespace LoLGears
       return new List<T>(parts.Select((x) => parser(x)));
     }
 
+    private static string getNullableString(SQLiteDataReader reader, string key) {
+      var value = reader[key];
+      if (value.Equals(DBNull.Value)) {
+        return null;
+      }
+      return (string)value;
+    }
+
     private LogData GetDataFromRow(SQLiteDataReader reader) {
-      return new LogData() {
-        id = (long) reader["id"],
-        GameID = (string) reader["game_id"],
-        LogFile = (string) reader["log_file"],
-        Server = (string) reader["server"],
-        GameLength = (int) reader["length"],
-        GameStartDate = DateTime.Parse((string) reader["start_date"]),
-        Spectated = (bool) reader["spectated"],
-        BotGame = (bool) reader["bot_game"],
-        GameVersion = new Version((string) reader["game_version"]),
-        Map = reader["map"].Equals(DBNull.Value) ? "Unknown Map" : (string) reader["map"],
-        BlueTeam = SplitObjects((string) reader["blue_team"], Summoner.Parse),
-        PurpleTeam = SplitObjects((string) reader["purple_team"], Summoner.Parse),
-        PlayerName = (string) reader["player_name"],
-        ExitCode = (LogData.ExitCodes)Enum.Parse(typeof(LogData.ExitCodes), (string) reader["exit_code"]),
-        Deaths = SplitObjects((string) reader["deaths"], int.Parse)
-      };
+      try {
+        return new LogData() {
+          id = (long) reader["id"],
+          GameID = LogDatabase.getNullableString(reader, "game_id"),
+          LogFile = (string) reader["log_file"],
+          Server = LogDatabase.getNullableString(reader, "server"),
+          GameLength = (int) reader["length"],
+          GameStartDate = DateTime.Parse((string) reader["start_date"]),
+          Spectated = (bool) reader["spectated"],
+          BotGame = (bool) reader["bot_game"],
+          GameVersion = new Version((string) reader["game_version"]),
+          Map = LogDatabase.getNullableString(reader, "map") ?? "Unknown Map",
+          BlueTeam = SplitObjects((string) reader["blue_team"], Summoner.Parse),
+          PurpleTeam = SplitObjects((string) reader["purple_team"], Summoner.Parse),
+          PlayerName = (string) reader["player_name"],
+          ExitCode = (LogData.ExitCodes)Enum.Parse(typeof(LogData.ExitCodes), (string) reader["exit_code"]),
+          Deaths = SplitObjects((string) reader["deaths"], int.Parse)
+        };
+      } catch (Exception e) {
+        Logger.LogException(e);
+        return null;
+      }
     }
   }
 }
+
