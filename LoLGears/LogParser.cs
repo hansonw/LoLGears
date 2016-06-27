@@ -178,7 +178,10 @@ namespace LoLGears
             }
           }
 
-          if (parts.Length != 5) continue;
+          // v6.6 and above remove the excessive "Xkb added" columns.
+          if (parts.Length != 3 && parts.Length != 5) {
+            continue;
+          }
 
           double timeStamp = 0;
           if (!double.TryParse(parts[0].Trim(), NumberStyles.Number, new CultureInfo("en-US"), out timeStamp)) {
