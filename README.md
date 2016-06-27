@@ -1,6 +1,8 @@
 LoLGears
 ========
 
+> NOTE: LoLGears currently does not work on game logs from client v6.6 and above (i.e. games since March 23, 2016), due to a log format change. There is currently no ETA on a fix, sorry!
+
 Windows app that tracks your lifetime game history based on LoL's debug logs.  
 Download here: https://github.com/hansonw/LoLGears/releases
   
